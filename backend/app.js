@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mysql = require('mysql2')
 const dotenv = require('dotenv').config()
+const cors = require('cors')
 
 const app = express();
 
@@ -12,6 +13,7 @@ const usersRouter = require('./routes/users');
 const foldersRouter = require('./routes/folders');
 const notesRouter = require('./routes/notes');
 
+app.use(cors())
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

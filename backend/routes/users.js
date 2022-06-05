@@ -47,14 +47,16 @@ router.post('/login', (req, res) => {
       if(err){
         res.send("Wrong email or password")
       }
+      console.log(result);
 
       let decryptedPass = AES.decrypt(result[0].password, process.env.SALT).toString(cryptoJS.enc.Utf8);
 
       if(req.body.password === decryptedPass){
         connection.query(`SELECT id, email, createdDate FROM users WHERE id=${result[0].id}`, (err, finalResult) => {
-          res.status(200).json(finalResult)
-        })
+          if(err) console.error(err);
 
+          res.status(200).send(finalResult[0])
+        })
       } else {
         res.send("Wrong email or password")
       }
