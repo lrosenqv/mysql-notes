@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../connection').pool
 
-//GET maps by id
+//GET folder by id
 router.get('/:id', (req, res) => {
-  pool.query(`SELECT * FROM maps WHERE id="${req.params.id}"`, (err, result) => {
+  pool.query(`SELECT * FROM folders WHERE id="${req.params.id}"`, (err, result) => {
     if(err){
       console.error(err);
     }
@@ -12,22 +12,22 @@ router.get('/:id', (req, res) => {
   })
 });
 
-//CHANGE map title
+//CHANGE folder title
 router.put('/change/:id', (req, res) => {
-  let sql = `UPDATE maps SET title="${req.body.title}" WHERE id="${req.params.id}"`
+  let sql = `UPDATE folders SET title="${req.body.title}" WHERE id="${req.params.id}"`
 
   pool.query(sql, (err, result) => {
     if(err){
       console.error(err)
     };
 
-    res.status(200).send("Map title is updated!")
+    res.status(200).send("Folder title is updated!")
   })
 })
 
-//DELETE map
+//DELETE folder
 router.delete('/delete/:id', (req, res) => {
-  let sql = `DELETE FROM maps WHERE id=${req.params.id}`
+  let sql = `DELETE FROM folders WHERE id=${req.params.id}`
   
   pool.query(sql, (err, result) => {
     if(err) console.error(err);
@@ -36,9 +36,9 @@ router.delete('/delete/:id', (req, res) => {
   })
 })
 
-//GET maps by user
+//GET folders by user
 router.get('/user=:userId', (req, res) => {
-  pool.query(`SELECT * FROM maps WHERE userId="${req.params.userId}"`, (err, result) => {
+  pool.query(`SELECT * FROM folders WHERE userId="${req.params.userId}"`, (err, result) => {
     if(err){
       console.error(err);
     }
@@ -46,9 +46,9 @@ router.get('/user=:userId', (req, res) => {
   })
 });
 
-//CREATE new map
+//CREATE new folder
 router.post('/user=:userId', (req, res) => {
-  let sql = `INSERT INTO maps (userId, title) VALUES ("${req.params.userId}", "${req.body.title}")`
+  let sql = `INSERT INTO folders (userId, title) VALUES ("${req.params.userId}", "${req.body.title}")`
   pool.query(sql, (err, result) => {
     if(err){
       console.error(err);
@@ -56,6 +56,5 @@ router.post('/user=:userId', (req, res) => {
     res.status(200).send(result)
   })
 });
-
 
 module.exports = router;

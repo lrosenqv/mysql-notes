@@ -9,7 +9,7 @@ const app = express();
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-const mapsRouter = require('./routes/maps');
+const foldersRouter = require('./routes/folders');
 const notesRouter = require('./routes/notes');
 
 app.use(logger('dev'));
@@ -20,7 +20,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/maps', mapsRouter);
+app.use('/folders', foldersRouter);
 app.use('/notes', notesRouter)
 
 
