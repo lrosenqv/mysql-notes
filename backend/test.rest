@@ -1,0 +1,59 @@
+GET http://localhost:4000/users
+
+###
+
+GET http://localhost:4000/maps
+
+###
+
+GET http://localhost:4000/notes
+
+###
+
+POST http://localhost:4000/users
+Content-Type: application/json
+
+{
+  "email": "user_3@email.com",
+  "password": "TestTestTest"
+}
+
+###
+
+POST http://localhost:4000/users/login
+Content-Type: application/json
+
+{
+  "email": "user_1@email.com",
+  "password": "TestTest"
+}
+###
+
+POST http://localhost:4000/maps
+Content-Type: application/json
+
+###
+
+POST http://localhost:4000/notes
+Content-Type: application/json
+
+
+###
+
+PUT http://localhost:4000/maps/:id
+Content-Type: application/json
+
+###
+
+PUT http://localhost:4000/notes/:id
+Content-Type: application/json
+
+###
+
+DELETE http://localhost:4000/maps/:id
+Content-Type: application/json
+
+###
+
+DELETE http://localhost:4000/notes/:id
+Content-Type: application/json

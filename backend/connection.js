@@ -6,13 +6,20 @@ const pool = mysql.createPool({
   database: process.env.MYSQL_DB,
   user: process.env.MYSQL_DB_USER,
   password: process.env.MYSQL_DB_PASS,
+  connectionLimit: 10,
+  multipleStatements: true
 })
 
-pool.getConnection(function(err){
+pool.getConnection(function(err, connection){
   if(err){
     console.error(err);
   }
   console.log("Connected");
+  connection.release()
+})
+
+pool.on('release', (connection) => {
+  console.log('Connection %d released', connection.threadId);
 })
 
 exports.connection = pool;
