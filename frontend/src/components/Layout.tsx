@@ -19,15 +19,13 @@ export const Layout = () => {
 
   return(<>
     <header>
-      <nav>
-        <h1>MySQL - Notes</h1>
-      </nav>
-      {!loggedIn && <LoginForm />}
+      <h1>MySQL - Notes</h1>
       {loggedIn && <button className="logoutBtn" onClick={logout}>Log out</button>}
     </header>
 
     <main>
-      <Outlet></Outlet>
+      {!loggedIn && <LoginForm />}
+      {loggedIn && <Outlet></Outlet>}
     </main>
 
     <footer>lrosenqv 2022</footer>
