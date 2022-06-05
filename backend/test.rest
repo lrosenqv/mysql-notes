@@ -14,8 +14,8 @@ POST http://localhost:4000/users
 Content-Type: application/json
 
 {
-  "email": "user_3@email.com",
-  "password": "TestTestTest"
+  "email": "paula@email.com",
+  "password": "hejsan"
 }
 
 ###
@@ -29,21 +29,21 @@ Content-Type: application/json
 }
 ###
 
-POST http://localhost:4000/maps/user=11
+POST http://localhost:4000/maps/user=12
 Content-Type: application/json
 
 {
-  "title": "First map for user_3"
+  "title": "Paulas mapp!"
 }
 
 ###
 
-POST http://localhost:4000/notes/map=2
+POST http://localhost:4000/notes/map=7
 Content-Type: application/json
 
 {
-  "title": "Third title that will",
-  "text": "Be MOOOOVED"
+  "title": "Paulas första inlägg",
+  "text": "Hejsan svejsan i skogen!"
 }
 
 

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const pool = require('../connection').connection
+const pool = require('../connection').pool
 const cryptoJS = require('crypto-js');
 const AES = require('crypto-js/aes');
 
@@ -18,7 +18,8 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   let sql = `SELECT id, email FROM users WHERE id=${req.params.id}`
   pool.query(sql, (err, result) => {
-    if(err) throw err;
+    if(err) console.error(err);
+
     res.json(result)
   })
 })
@@ -31,7 +32,7 @@ router.post('/', (req, res) => {
   pool.query(sql, (err, result) => {
     if(err) console.error(err);
 
-    res.status(200).send("New user added!")
+    res.status(201).send("New user added!")
   })
 })
 
@@ -51,7 +52,7 @@ router.post('/login', (req, res) => {
 
       if(req.body.password === decryptedPass){
         connection.query(`SELECT id, email, createdDate FROM users WHERE id=${result[0].id}`, (err, finalResult) => {
-          res.status(200).send(finalResult[0])
+          res.status(200).json(finalResult)
         })
 
       } else {

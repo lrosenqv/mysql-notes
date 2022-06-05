@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const pool = require('../connection').connection
+const pool = require('../connection').pool
 
 //GET maps by id
 router.get('/:id', (req, res) => {

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const pool = require('../connection').connection
+const pool = require('../connection').pool
 
 //GET all notes
 router.get('/', (req, res) => {
@@ -17,7 +17,7 @@ router.get('/:id', (req, res) => {
   pool.query(`SELECT * FROM notes WHERE id="${req.params.id}"`, (err, result) => {
     if(err) console.error(err);
 
-    res.status(200).send(result)
+    res.status(200).json(result)
   })
 })
 
@@ -30,8 +30,7 @@ router.put('/change/:id', (req, res) => {
       console.error(err)
     };
 
-    res.status(200).send("Your note is updated!" +
-     result)
+    res.status(200).send("Your note is updated!")
   })
 })
 
@@ -76,7 +75,7 @@ router.post('/map=:mapId', (req, res) => {
     if(err){
       console.error(err);
     }
-    res.status(200).send(result)
+    res.status(201).send(result)
   })
 });
 
