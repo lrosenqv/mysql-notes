@@ -1,13 +1,20 @@
+import axios from "axios";
+import { IFolder } from "../models/IFolder";
+
 export class FolderService{
-  constructor(){}
+  getFolderById(){}
 
-  getMapById(){}
+  async getUserFolders(userId: number | string){
+    let response = axios.get<IFolder[]>(`http://localhost:4000/folders/user/${userId}`)
+      .then(res => {
+        return res.data
+      })
+    return response
+  }
 
-  getUserMaps(){}
+  createFolder(){}
 
-  createMap(){}
+  changeFolder(){}
 
-  changeMap(){}
-
-  deleteMap(){}
+  deleteFolder(){}
 }

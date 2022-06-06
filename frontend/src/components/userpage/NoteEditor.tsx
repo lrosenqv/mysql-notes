@@ -1,4 +1,4 @@
-export const EditingTool = () => {
+export const NoteEditor = () => {
   return(
     <>
       <section>Live view</section>

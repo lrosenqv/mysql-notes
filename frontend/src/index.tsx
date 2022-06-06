@@ -7,6 +7,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import { Dashboard } from './components/userpage/Dashboard';
 import { NotFound } from './components/NotFound';
+import { Folder } from './components/userpage/Folder';
+import { Note } from './components/userpage/Note';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -18,6 +20,7 @@ root.render(
         <Route path="/" element={<Layout />}>
           <Route index element={<App />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/folder/:id" element={<Folder/>} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

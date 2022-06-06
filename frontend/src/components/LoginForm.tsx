@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react"
+import { ChangeEvent, SyntheticEvent, useState } from "react"
 import { ILogin } from "../models/ILogin"
 import { UserService } from "../services/UserService"
 const service = new UserService()
@@ -11,12 +11,13 @@ export const LoginForm = () => {
 
   function handleChange(e: ChangeEvent<HTMLInputElement>){
     let name = e.target.name;
-
     setLoginDetails({...loginDetails, [name]: e.target.value})
   }
 
-  function login(){
+  function login(e: SyntheticEvent){
+    e.preventDefault()
     service.loginUser(loginDetails.email, loginDetails.password)
+    window.location.assign('/dashboard')
   }
 
   return(

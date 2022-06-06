@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Outlet } from "react-router-dom"
+import { Link, Outlet } from "react-router-dom"
 import { LoginForm } from "./LoginForm"
 
 export const Layout = () => {
@@ -15,17 +15,18 @@ export const Layout = () => {
   function logout(){
     setLoggedIn(false)
     localStorage.removeItem('onlineUserKey')
+    window.location.assign('/')
   }
 
   return(<>
     <header>
-      <h1>MySQL - Notes</h1>
-      {loggedIn && <button className="logoutBtn" onClick={logout}>Log out</button>}
+      <h1><Link to="/">MySQL - Notes</Link></h1>
+      {loggedIn && <button className="logoutBtn" type="submit" onClick={logout}>Log out</button>}
     </header>
 
     <main>
       {!loggedIn && <LoginForm />}
-      {loggedIn && <Outlet></Outlet>}
+      <Outlet></Outlet>
     </main>
 
     <footer>lrosenqv 2022</footer>

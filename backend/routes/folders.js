@@ -37,7 +37,7 @@ router.delete('/delete/:id', (req, res) => {
 })
 
 //GET folders by user
-router.get('/user=:userId', (req, res) => {
+router.get('/user/:userId', (req, res) => {
   pool.query(`SELECT * FROM folders WHERE userId="${req.params.userId}"`, (err, result) => {
     if(err){
       console.error(err);
@@ -47,7 +47,7 @@ router.get('/user=:userId', (req, res) => {
 });
 
 //CREATE new folder
-router.post('/user=:userId', (req, res) => {
+router.post('/user/:userId', (req, res) => {
   let sql = `INSERT INTO folders (userId, title) VALUES ("${req.params.userId}", "${req.body.title}")`
   pool.query(sql, (err, result) => {
     if(err){

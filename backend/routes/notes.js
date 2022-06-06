@@ -34,7 +34,7 @@ router.put('/change/:id', (req, res) => {
   })
 })
 
-//CHANGE map
+//CHANGE folder
 router.put('/switchFolder/:id', (req, res) => {
   let sql = `UPDATE notes SET folderId="${req.body.folderId}" WHERE id="${req.params.id}"`
 
@@ -58,8 +58,8 @@ router.delete('/delete/:id', (req, res) => {
   })
 })
 
-//GET notes by map
-router.get('/map=:folderId', (req, res) => {
+//GET notes by folder
+router.get('/folder/:folderId', (req, res) => {
   pool.query(`SELECT * FROM notes WHERE folderId="${req.params.folderId}"`, (err, result) => {
     if(err){
       console.error(err);
@@ -69,7 +69,7 @@ router.get('/map=:folderId', (req, res) => {
 });
 
 //CREATE new note
-router.post('/folder=:folderId', (req, res) => {
+router.post('/folder/:folderId', (req, res) => {
   let sql = `INSERT INTO notes (folderId, title, text) VALUES ("${req.params.folderId}", "${req.body.title}", "${req.body.text}")`
   pool.query(sql, (err, result) => {
     if(err){

@@ -1,9 +1,18 @@
-export class NoteService{
-  constructor(){}
+import axios from "axios";
+import { INote } from "../models/INote";
 
+export class NoteService{
   getNoteById(){}
 
-  getMapNotes(){}
+  async getFolderNotes(folderId: number){
+    console.log(folderId);
+    
+    let response = await axios.get<INote[]>(`http://localhost:4000/notes/folder/${folderId}`)
+      .then(res => {
+        return res.data
+      })
+    return response
+  }
 
   createNote(){}
 
