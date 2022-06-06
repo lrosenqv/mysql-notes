@@ -10,12 +10,13 @@ const pool = mysql.createPool({
   multipleStatements: true
 })
 
+/*
 pool.on('release', (connection) => {
   console.log('Connection %d released', connection.threadId);
 })
 
 pool.on('connection', (stream) => { 
   console.log('Someone connected!');
-})
+})*/
 
 exports.pool = pool;

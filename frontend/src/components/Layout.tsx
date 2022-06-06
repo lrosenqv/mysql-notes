@@ -10,7 +10,7 @@ export const Layout = () => {
     if(ls){
       setLoggedIn(true)
     }
-  }, [])
+  }, [loggedIn])
 
   function logout(){
     setLoggedIn(false)

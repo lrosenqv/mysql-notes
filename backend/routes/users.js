@@ -3,6 +3,7 @@ const router = express.Router();
 const pool = require('../connection').pool
 const cryptoJS = require('crypto-js');
 const AES = require('crypto-js/aes');
+const mysql = require('mysql2')
 
 //GET all users
 router.get('/', (req, res) => {
@@ -38,17 +39,45 @@ router.post('/', (req, res) => {
 
 //Login
 router.post('/login', (req, res) => {
-  pool.getConnection((err, connection) => {
-    if(err) console.error(err);
+  let sql = `SELECT * FROM users WHERE email="${req.body.email}"`
 
-    let sql = `SELECT id, email, password FROM users WHERE email="${req.body.email}"`
+  pool.query(sql, (error, result) => {
+    if(result.length > 0) {
+      let decryptedPass = AES.decrypt(result[0].password, process.env.SALT).toString(cryptoJS.enc.Utf8);
 
-    connection.query(sql, (err, result) => {
-      if(err){
-        res.send("Wrong email or password")
-      }
-      console.log(result);
+      if(req.body.password === decryptedPass){
+        console.log(res);
+        res.status(200).json(result[0].id)
+      } 
+    } else {
+      console.log(res.status());
+      res.status(403).send('Please sign in with valid credentials');
+    }
 
+      /*if(result.length <= 0){
+        console.log("Empty", result);
+      } else {
+        console.log('Not empty', result);
+      }*/
+      /*
+      
+      } */
+
+      if(error) throw error
+    })
+
+
+
+})
+
+module.exports = router;
+
+
+  /*pool.getConnection((err, connection) => {
+    if(err) throw err;
+
+    let sql = `SELECT * FROM users WHERE email="${req.body.email}"`
+    connection.query(sql, (error, result) => {
       let decryptedPass = AES.decrypt(result[0].password, process.env.SALT).toString(cryptoJS.enc.Utf8);
 
       if(req.body.password === decryptedPass){
@@ -59,10 +88,10 @@ router.post('/login', (req, res) => {
         })
       } else {
         res.send("Wrong email or password")
-      }
-      connection.release()
-    })
-  })
-})
+      } 
+      connection.destroy()
 
-module.exports = router;
+      if(error) throw error
+    })
+    
+  })*/
