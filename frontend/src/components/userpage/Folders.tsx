@@ -9,14 +9,12 @@ const fService = new FolderService();
 const nService = new NoteService();
 
 export const Folders = () => {
-  const [userId, setUserId] = useState<number>(0)
   const [folders, setFolders] = useState<IFolder[]>();
 
-  let ls = localStorage.getItem('onlineUserKey') || ""
-
+  let ls = localStorage.getItem('onlineUserKey') || "";
 
   useEffect(() => {
-    fService.getUserFolders(ls)
+    fService.getUserFolders(JSON.parse(ls))
     .then(res => {
       setFolders(res)      
     })
@@ -24,24 +22,28 @@ export const Folders = () => {
 
   const [createOpen, setCreateOpen] = useState(false);
 
+  function openFolder(id: number){
+    window.location.assign(`/folder/${id}`)
+  }
+
   let printFolders = folders?.map(folder => {
     let createdDate = new Date(folder.createdDate).toLocaleDateString('En-EN', { weekday: "short", month: "long", day: "numeric", year: "2-digit" })
 
-    return(<li key={folder.id}>
-      <Link to={`/folder/${folder.id}`}>{folder.title}</Link>
-      <span>{createdDate}</span>
+    return(<li key={folder.id} className="listItem" onClick={() => openFolder(folder.id)}>
+      <p>{folder.title}</p>
+      <p>{createdDate}</p>
     </li>)
   })
 
 
   return(<>
-    <section>
+    {!createOpen && 
       <ul>
-        {printFolders}
         <li><button onClick={() => setCreateOpen(true)}>Create new...</button></li>
+        {printFolders}
       </ul>
-    </section>
-
+    }
+    
     {createOpen && <>
       <button onClick={() => setCreateOpen(false)}>Close</button>
       <FolderCreate />

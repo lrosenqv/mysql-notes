@@ -1,4 +1,3 @@
-import { isLabelWithInternallyDisabledControl } from "@testing-library/user-event/dist/utils"
 import { ChangeEvent, SyntheticEvent, useState } from "react"
 import { ILogin } from "../models/ILogin"
 import { UserService } from "../services/UserService"

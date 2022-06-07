@@ -1,0 +1,66 @@
+body{
+  background-color: rgb(19, 19, 21);
+  color: white;
+  margin: 0;
+  padding: 0;
+  min-height:100vh;
+  display: flex;
+  flex-direction: column;
+
+  header{
+    display: flex;
+    justify-content: center;
+    position: relative;
+
+  }
+
+  a{
+    color: white;
+    text-decoration: none;
+  }
+  
+  main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  button{
+    background-color: rgb(105, 128, 130);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+
+  .logoutBtn{
+    justify-self: flex-end;
+    position: absolute;
+    top: 0px;
+    right: 20px;
+    align-self: center;
+    font-size: 1.1rem;
+    background-color: rgb(70, 65, 84);
+  }
+
+
+  form{
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    gap: 10px;
+
+    input{
+      padding: 5px;
+      background-color: rgb(223, 223, 235);
+      border: none;
+      
+      &::placeholder{
+        color: rgb(85, 85, 85);
+        font-style: italic;
+        text-transform: lowercase;
+      }
+
+    }
+  }
+}

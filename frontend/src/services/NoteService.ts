@@ -4,7 +4,13 @@ import { INote } from "../models/INote";
 let url = "http://localhost:4000/notes"
 
 export class NoteService{
-  getNoteById(){}
+  async getNoteById(noteId: number){
+    let response = await axios.get<INote[]>(`${url}/${noteId}`)
+      .then(res => {
+        return res.data
+      })
+    return response
+  }
 
   async getFolderNotes(folderId: number){
     let response = await axios.get<INote[]>(`${url}/f/${folderId}`)

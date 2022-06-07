@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom"
 import { INote } from "../../models/INote"
 import { FolderService } from "../../services/FolderService"
 import { NoteService } from "../../services/NoteService"
-import { Note } from "./Note"
 
 const fService = new FolderService()
 const nService = new NoteService()
@@ -12,8 +11,6 @@ export const Folder = () => {
   const { id } = useParams();
   let folderId: number = Number(id);
   const [notes, setNotes] = useState<INote[]>();
-  const [showNote, setShowNote] = useState<INote>(Object);
-  const [openNote, setOpenNote] =  useState(false);
 
   useEffect(() => {
     nService.getFolderNotes(folderId)
@@ -22,9 +19,13 @@ export const Folder = () => {
     })
   }, [folderId])
 
+  function openNote(noteId: number){
+    window.location.assign(`/note/${noteId}`)
+  }
+
   let printNotes = notes?.map(note => {
     return(
-      <li key={note.id} onClick={() => {setShowNote(note); setOpenNote(true)}}>
+      <li key={note.id} className="listItem" onClick={() => openNote(note.id)}>
         <p>{note.title}</p>
         <p>{note.text}</p>
       </li>
@@ -32,12 +33,10 @@ export const Folder = () => {
   })
 
   return(<>
-    <ul>
-      {printNotes}
-    </ul>
-    {openNote && <>
-      <Note note={showNote} />
-      <button type="button" onClick={() => setOpenNote(false)}>Close</button>
-    </>}
+    <section>
+      <ul>
+        {printNotes}
+      </ul>
+    </section>
   </>)
 }

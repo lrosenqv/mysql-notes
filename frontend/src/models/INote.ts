@@ -1,6 +1,6 @@
 export interface INote{
-  id: string,
-  folderId: string,
+  id: number,
+  folderId: number,
   title: string;
   text: string,
   createdDate: Date

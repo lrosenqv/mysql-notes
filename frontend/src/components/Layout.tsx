@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link, Outlet } from "react-router-dom"
 import { LoginForm } from "./LoginForm"
+import "../styles/Layout.scss"
 
 export const Layout = () => {
   const [loggedIn, setLoggedIn] = useState(false)
@@ -25,6 +26,7 @@ export const Layout = () => {
     </header>
 
     <main>
+      {loggedIn && <a href="/dashboard">My dashboard</a>}
       {!loggedIn && <LoginForm />}
       <Outlet></Outlet>
     </main>
