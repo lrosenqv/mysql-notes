@@ -19,6 +19,8 @@ export const LoginForm = () => {
 
   function login(e: SyntheticEvent){
     e.preventDefault()
+    console.log(loginValues);
+    
     service.loginUser(loginValues.email, loginValues.password)
     .then(data => {
       if(data === 200){

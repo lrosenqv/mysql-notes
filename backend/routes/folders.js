@@ -37,7 +37,7 @@ router.delete('/delete/:id', (req, res) => {
 })
 
 //GET folders by user
-router.get('/user/:userId', (req, res) => {
+router.get('/u/:userId', (req, res) => {
   pool.query(`SELECT * FROM folders WHERE userId="${req.params.userId}"`, (err, result) => {
     if(err){
       console.error(err);

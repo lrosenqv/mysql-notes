@@ -41,57 +41,20 @@ router.post('/', (req, res) => {
 router.post('/login', (req, res) => {
   let sql = `SELECT * FROM users WHERE email="${req.body.email}"`
 
+  console.log(req.body)
   pool.query(sql, (error, result) => {
     if(result.length > 0) {
       let decryptedPass = AES.decrypt(result[0].password, process.env.SALT).toString(cryptoJS.enc.Utf8);
 
       if(req.body.password === decryptedPass){
-        console.log(res);
+        //console.log(res);
         res.status(200).json(result[0].id)
       } 
     } else {
-      console.log(res.status());
-      res.status(403).send('Please sign in with valid credentials');
+      res.status(404).send('Please sign in with valid credentials');
     }
-
-      /*if(result.length <= 0){
-        console.log("Empty", result);
-      } else {
-        console.log('Not empty', result);
-      }*/
-      /*
-      
-      } */
-
-      if(error) throw error
-    })
-
-
-
+    if(error) throw error
+  })
 })
 
 module.exports = router;
-
-
-  /*pool.getConnection((err, connection) => {
-    if(err) throw err;
-
-    let sql = `SELECT * FROM users WHERE email="${req.body.email}"`
-    connection.query(sql, (error, result) => {
-      let decryptedPass = AES.decrypt(result[0].password, process.env.SALT).toString(cryptoJS.enc.Utf8);
-
-      if(req.body.password === decryptedPass){
-        connection.query(`SELECT id, email, createdDate FROM users WHERE id=${result[0].id}`, (err, finalResult) => {
-          if(err) console.error(err);
-
-          res.status(200).send(finalResult[0])
-        })
-      } else {
-        res.send("Wrong email or password")
-      } 
-      connection.destroy()
-
-      if(error) throw error
-    })
-    
-  })*/

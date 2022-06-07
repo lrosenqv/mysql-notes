@@ -31,7 +31,6 @@ export const Folder = () => {
     )
   })
 
-
   return(<>
     <ul>
       {printNotes}
