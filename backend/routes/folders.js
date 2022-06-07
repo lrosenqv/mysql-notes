@@ -4,7 +4,9 @@ const pool = require('../connection').pool
 
 //GET folder by id
 router.get('/:id', (req, res) => {
-  pool.query(`SELECT * FROM folders WHERE id="${req.params.id}"`, (err, result) => {
+  let sql = `SELECT * FROM folders WHERE id=?`
+
+  pool.execute(sql, [req.params.id], (err, result) => {
     if(err){
       console.error(err);
     }
@@ -14,9 +16,9 @@ router.get('/:id', (req, res) => {
 
 //CHANGE folder title
 router.put('/change/:id', (req, res) => {
-  let sql = `UPDATE folders SET title="${req.body.title}" WHERE id="${req.params.id}"`
+  let sql = `UPDATE folders SET title=? WHERE id=?`
 
-  pool.query(sql, (err, result) => {
+  pool.execute(sql, [req.body.title, req.params.id], (err, result) => {
     if(err){
       console.error(err)
     };
@@ -27,18 +29,20 @@ router.put('/change/:id', (req, res) => {
 
 //DELETE folder
 router.delete('/delete/:id', (req, res) => {
-  let sql = `DELETE FROM folders WHERE id=${req.params.id}`
+  let sql = `DELETE FROM folders WHERE id=?`
   
-  pool.query(sql, (err, result) => {
+  pool.execute(sql, [req.params.id], (err, result) => {
     if(err) console.error(err);
 
     res.send(result)
   })
 })
 
-//GET folders by user
-router.get('/u/:userId', (req, res) => {
-  pool.query(`SELECT * FROM folders WHERE userId="${req.params.userId}"`, (err, result) => {
+//CREATE new folder
+router.post('/u/:userId', (req, res) => {
+  let sql = `INSERT INTO folders (userId, title) VALUES (?, ?)`
+
+  pool.execute(sql, [req.params.userId, req.body.title], (err, result) => {
     if(err){
       console.error(err);
     }
@@ -46,10 +50,11 @@ router.get('/u/:userId', (req, res) => {
   })
 });
 
-//CREATE new folder
-router.post('/user/:userId', (req, res) => {
-  let sql = `INSERT INTO folders (userId, title) VALUES ("${req.params.userId}", "${req.body.title}")`
-  pool.query(sql, (err, result) => {
+//GET folders by user
+router.get('/u/:userId', (req, res) => {
+  let sql = `SELECT * FROM folders WHERE userId=?`
+
+  pool.execute(sql, [req.params.userId], (err, result) => {
     if(err){
       console.error(err);
     }

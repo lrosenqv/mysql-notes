@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { INote } from "../../models/INote"
 import { FolderService } from "../../services/FolderService"
 import { NoteService } from "../../services/NoteService"
 import { Folders } from "./Folders"
@@ -13,22 +14,27 @@ export const Dashboard = () => {
   const id: number = JSON.parse(ls)
   const [showFolders, setShowFolders] = useState(true)
   const [showNotes, setShowNotes] = useState(false)
+  const [notes, setNotes] = useState<INote[]>();
 
   useEffect(() => {
     nService.getNotesByUser(id)
     .then(res => {
-      
-      
+      setNotes(res)
     })
-    
-    //nService.getNotesByUser
   }, [])
+
+  let noteList = notes?.map((note) => {
+    return(<li key={note.id}>
+      <p>{note.title}</p>
+      <p>{note.text}</p>
+    </li>)
+  })
 
   return(<>
     <button type="button" onClick={() => {setShowFolders(true); setShowNotes(false)}}>Folders</button>
     <button type="button" onClick={() => {setShowFolders(false); setShowNotes(true)}}>Notes</button>
     
     {showFolders && <Folders />}
-    {showNotes && <Notes />}
+    {showNotes && <> <Notes /> <ul>{noteList}</ul></>}
   </>)
 }

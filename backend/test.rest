@@ -14,7 +14,7 @@ POST http://localhost:4000/users
 Content-Type: application/json
 
 {
-  "email": "paula@email.com",
+  "email": "louise@email.com",
   "password": "hejsan"
 }
 
@@ -24,26 +24,26 @@ POST http://localhost:4000/users/login
 Content-Type: application/json
 
 {
-  "email": "paula@email.com",
+  "email": "louise@email.com",
   "password": "hejsan"
 }
 ###
 
-POST http://localhost:4000/folders/user=12
+POST http://localhost:4000/folders/u/13
 Content-Type: application/json
 
 {
-  "title": "Paulas mapp!"
+  "title": "Louises mapp!"
 }
 
 ###
 
-POST http://localhost:4000/notes/map=7
+POST http://localhost:4000/notes/f/8
 Content-Type: application/json
 
 {
-  "title": "Paulas första inlägg",
-  "text": "Hejsan svejsan i skogen!"
+  "title": "Min första anteckning",
+  "text": "Jag älskar hundar"
 }
 
 
