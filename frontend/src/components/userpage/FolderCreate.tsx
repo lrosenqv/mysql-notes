@@ -1,8 +1,15 @@
+import { useState } from "react"
+import { NewFolder } from "../../models/NewFolder"
+import { FolderService } from "../../services/FolderService"
+
+const fService = new FolderService();
+
 export const FolderCreate = () => {
+  const [newFolder, setNewFolder] = useState<NewFolder>({title: ""})
+
   return(
-    <form>
-      <input type="text" name="title" placeholder="Title" />
-      <input type="text" name="text" placeholder="Notes notes notes" />
+    <form onSubmit={(e) => {e. preventDefault(); fService.createFolder(newFolder); window.location.assign('/dashboard')}}>
+      <input type="text" name="title" placeholder="Title" onChange={(e) => { setNewFolder({...newFolder, title: e.target.value})}} />
       <button>Create folder</button>
     </form>
   )

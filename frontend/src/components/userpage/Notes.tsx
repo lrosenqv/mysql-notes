@@ -33,7 +33,9 @@ export const Notes = () => {
   return(<>
     {!editorOpen && 
     <ul>
-      <li className="listItem"><button onClick={() => setEditorOpen(true)}>Create new...</button></li>
+      <li className="listItem" onClick={() => setEditorOpen(true)}>
+        <p>Create new...</p>
+      </li>
       {noteList}
     </ul>
     }

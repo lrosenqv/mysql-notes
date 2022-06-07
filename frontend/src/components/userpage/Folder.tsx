@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import { INote } from "../../models/INote"
 import { FolderService } from "../../services/FolderService"
 import { NoteService } from "../../services/NoteService"
+import { NoteCreate } from "./NoteCreate"
 
 const fService = new FolderService()
 const nService = new NoteService()
@@ -11,6 +12,7 @@ export const Folder = () => {
   const { id } = useParams();
   let folderId: number = Number(id);
   const [notes, setNotes] = useState<INote[]>();
+  const [noteCreateOpen, setNoteCreateOpen] = useState(false);
 
   useEffect(() => {
     nService.getFolderNotes(folderId)
@@ -35,8 +37,13 @@ export const Folder = () => {
   return(<>
     <section>
       <ul>
+        <li className="listItem" onClick={() => setNoteCreateOpen(true)}>
+          <p>Create new...</p>
+        </li>
         {printNotes}
       </ul>
     </section>
+
+    {noteCreateOpen && <NoteCreate/>}
   </>)
 }

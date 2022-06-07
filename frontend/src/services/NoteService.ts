@@ -1,4 +1,5 @@
 import axios from "axios";
+import { INewNote } from "../models/INewNote";
 import { INote } from "../models/INote";
 
 let url = "http://localhost:4000/notes"
@@ -28,7 +29,14 @@ export class NoteService{
     return response
   }
 
-  createNote(){}
+  createNote(newNote: INewNote, folderId: string){
+    console.log(newNote, folderId);
+    
+    axios.post<INewNote>(`${url}/f/${folderId}`, newNote)
+    .then(res => {
+      console.log(res);
+    })
+  }
 
   changeNote(){}
 

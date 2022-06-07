@@ -10,6 +10,7 @@ const nService = new NoteService();
 
 export const Folders = () => {
   const [folders, setFolders] = useState<IFolder[]>();
+  const [createOpen, setCreateOpen] = useState(false);
 
   let ls = localStorage.getItem('onlineUserKey') || "";
 
@@ -19,8 +20,6 @@ export const Folders = () => {
       setFolders(res)      
     })
   }, [])
-
-  const [createOpen, setCreateOpen] = useState(false);
 
   function openFolder(id: number){
     window.location.assign(`/folder/${id}`)
@@ -35,11 +34,12 @@ export const Folders = () => {
     </li>)
   })
 
-
   return(<>
     {!createOpen && 
       <ul>
-        <li><button onClick={() => setCreateOpen(true)}>Create new...</button></li>
+        <li onClick={() => setCreateOpen(true)} className="listItem">
+          <p>Create new...</p>
+        </li>
         {printFolders}
       </ul>
     }
