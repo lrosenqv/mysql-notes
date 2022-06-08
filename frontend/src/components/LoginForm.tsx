@@ -33,7 +33,7 @@ export const LoginForm = () => {
   }
 
   return(<>
-    <form onSubmit={login}>
+    <form onSubmit={login} id="loginForm">
       <input type="email" placeholder="John.Doe@example.com" name="email" onChange={handleChange} />
       <input type="password" placeholder="Password" name="password" onChange={handleChange} />
       <button type="submit">Log in</button>

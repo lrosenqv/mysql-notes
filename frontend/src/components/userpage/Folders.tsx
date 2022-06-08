@@ -1,21 +1,19 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { IFolder } from "../../models/IFolder";
 import { FolderService } from "../../services/FolderService";
-import { NoteService } from "../../services/NoteService";
-import { FolderCreate } from "./FolderCreate";
+import { UserService } from "../../services/UserService";
+import { FolderCreate } from "../editor/FolderCreate";
 
 const fService = new FolderService();
-const nService = new NoteService();
+const uService = new UserService();
 
 export const Folders = () => {
   const [folders, setFolders] = useState<IFolder[]>();
   const [createOpen, setCreateOpen] = useState(false);
 
-  let ls = localStorage.getItem('onlineUserKey') || "";
-
   useEffect(() => {
-    fService.getUserFolders(JSON.parse(ls))
+    let userId = uService.getLSKey()
+    fService.getUserFolders(userId)
     .then(res => {
       setFolders(res)      
     })
@@ -35,18 +33,18 @@ export const Folders = () => {
   })
 
   return(<>
-    {!createOpen && 
       <ul>
         <li onClick={() => setCreateOpen(true)} className="listItem">
           <p>Create new...</p>
         </li>
         {printFolders}
       </ul>
-    }
     
-    {createOpen && <>
-      <button onClick={() => setCreateOpen(false)}>Close</button>
+    {createOpen && 
+    <div className="bgBlur">
+      <button className="cancelBtn" onClick={() => setCreateOpen(false)}>Cancel</button>
       <FolderCreate />
-    </>}
+    </div>
+    }
   </>)
 }

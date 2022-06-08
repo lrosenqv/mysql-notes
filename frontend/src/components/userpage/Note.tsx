@@ -1,24 +1,18 @@
-import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
 import { INote } from "../../models/INote"
-import { NoteService } from "../../services/NoteService"
+import { INoteProps } from "../../models/INoteProps"
+import "../../styles/note.scss"
 
-const nService = new NoteService()
+export const Note = (props: INoteProps) => {
+  let note: INote = props.note
+  let createdDate = new Date(note.createdDate).toLocaleDateString('En-EN', { weekday: "short", month: "long", day: "numeric", year: "2-digit" })
 
-export const Note = () => {
-  const { id } = useParams()
-  let noteId = Number(id)
-  const [note, setNote] = useState<INote>(Object)
-
-  useEffect(() => {
-    nService.getNoteById(noteId)
-      .then(res => {
-        setNote(res[0])        
-      })
-  }, [])
-
-  return(<div>
-    <h2>{note.title}</h2>
-    <p>{note.text}</p>
+  return(
+    <div className="note">
+      <button className="editBtn" onClick={() => {window.location.assign(`/editor/${note.id}`)}}>Edit note</button>
+      <div className="noteDetails">
+        <h2>{note.title}</h2> |
+        <p>{createdDate}</p>
+      </div>
+      <div className="noteText">{note.text}</div>
   </div>)
 }

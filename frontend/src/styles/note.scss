@@ -1,0 +1,63 @@
+.note{
+  background-color: #ccc;
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: rgb(19, 19, 21);
+  position: relative;
+  top: -14rem;
+  border-radius: 8px 8px;
+
+  .noteDetails{
+    align-self: flex-start;
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    font-style: italic;
+    margin: 10px 10px;
+    align-items: baseline;
+
+    h2{
+      margin: 0 5px;
+      font-size: 0.9rem;    
+    }
+
+    p{
+      font-size: 0.8rem;
+      margin: 0 5px;
+    }
+  }
+
+  .noteText{
+    padding: 2rem 3rem 3rem;
+  }
+
+  .editBtn{
+    background-color: rgb(69, 81, 97);
+    align-self: flex-end;
+    position: relative;
+    border-top-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    transition: all 0.3s;
+    padding: 0.4rem 0.5rem;
+
+    &:hover{
+      background-color: rgb(57, 68, 82);
+    }
+  }
+}
+
+.closeBtn{
+  position: absolute;
+  top: 4rem;
+  background-color: rgb(70, 65, 84);
+  border-radius: 3px 3px;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: all 0.2s;
+
+  &:hover{
+    background-color: rgb(84, 79, 97);;
+  }
+}

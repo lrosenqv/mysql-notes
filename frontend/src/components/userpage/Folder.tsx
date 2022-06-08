@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { INote } from "../../models/INote"
-import { FolderService } from "../../services/FolderService"
 import { NoteService } from "../../services/NoteService"
-import { NoteCreate } from "./NoteCreate"
+import { NoteEditor } from "../editor/NoteEditor"
 
-const fService = new FolderService()
 const nService = new NoteService()
 
 export const Folder = () => {
@@ -44,6 +42,6 @@ export const Folder = () => {
       </ul>
     </section>
 
-    {noteCreateOpen && <NoteCreate/>}
+    {noteCreateOpen && <NoteEditor/>}
   </>)
 }

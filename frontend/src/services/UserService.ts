@@ -4,6 +4,15 @@ import { INewUser } from "../models/INewUser";
 const url = 'http://localhost:4000/users'
 
 export class UserService{
+  //Get userId from local storage
+  getLSKey(){
+    let ls = localStorage.getItem('onlineUserKey') || "";
+
+    if(ls){
+      ls = JSON.parse(ls)
+    }
+    return Number(ls)
+  }
 
   //Get user by id
   async getUser(id: number){

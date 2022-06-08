@@ -26,7 +26,7 @@ export const Layout = () => {
     </header>
 
     <main>
-      {loggedIn && <a href="/dashboard">My dashboard</a>}
+      {loggedIn && <a href="/dashboard" id="dashboardLink">My dashboard</a>}
       {!loggedIn && <LoginForm />}
       <Outlet></Outlet>
     </main>

@@ -1,29 +1,39 @@
 import { useEffect, useState } from "react"
 import { INote } from "../../models/INote"
 import { NoteService } from "../../services/NoteService"
-import { NoteEditor } from "./NoteEditor"
+import { UserService } from "../../services/UserService";
+import { NoteEditor } from "../editor/NoteEditor"
+import { Note } from "./Note";
 
 const nService = new NoteService();
-let ls = localStorage.getItem('onlineUserKey') || "";
+const uService = new UserService();
 
 export const Notes = () => {
   const [editorOpen, setEditorOpen] = useState(false)
   const [notes, setNotes] = useState<INote[]>();
+  const [showNote, setShowNote] = useState<INote>({
+    id: 0,
+    folderId: 0,
+    title: "",
+    text: "",
+    createdDate: new Date()
+  });
+  const [noteOpen, setNoteOpen] = useState(false);
 
   useEffect(() => {
-    nService.getNotesByUser(JSON.parse(ls))
+    let userId = uService.getLSKey()
+    nService.getNotesByUser(userId)
     .then(res => {
       setNotes(res)
     })
   },[])
 
-  function openNote(noteId: number){
-    window.location.assign(`/note/${noteId}`)
-  }
-
   let noteList = notes?.map(note => {
     return (
-    <li key={note.id} className="listItem" onClick={() => openNote(note.id)}>
+    <li key={note.id} className="listItem" onClick={() => {
+      setNoteOpen(true)
+      setShowNote(note)
+    }}>
         <p>{note.title}</p>
         <p>{note.text}</p>
     </li>
@@ -42,7 +52,14 @@ export const Notes = () => {
     
     {editorOpen && <>
       <button onClick={() => setEditorOpen(false)}>Close</button>
-      <NoteEditor />
+      <NoteEditor/>
     </>}
+
+    {noteOpen && 
+      <div className="bgBlur">
+        <button className="closeBtn" type="button" onClick={() => setNoteOpen(false)}>Close</button>
+        <Note note={showNote} />
+      </div>
+    }
   </>)
 }
