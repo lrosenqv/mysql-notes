@@ -34,26 +34,24 @@ export const Notes = () => {
       setNoteOpen(true)
       setShowNote(note)
     }}>
-        <p>{note.title}</p>
-        <p>{note.text}</p>
+        <h3>{note.title}</h3>
     </li>
     )
   })
 
   return(<>
-    {!editorOpen && 
     <ul>
       <li className="listItem" onClick={() => setEditorOpen(true)}>
         <p>Create new...</p>
       </li>
       {noteList}
     </ul>
-    }
     
-    {editorOpen && <>
+    
+    {editorOpen && <div className="bgBlur newNoteForm">
       <button onClick={() => setEditorOpen(false)}>Close</button>
       <NoteEditor/>
-    </>}
+    </div>}
 
     {noteOpen && 
       <div className="bgBlur">

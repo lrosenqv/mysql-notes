@@ -1,35 +1,75 @@
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useParams } from "react-router-dom";
-import { INewNote } from "../../models/INewNote";
+import { ICreateNote } from "../../models/ICreateNote";
+import { INote } from "../../models/INote";
+import { FolderService } from "../../services/FolderService";
+import { NoteService } from "../../services/NoteService";
 import "../../styles/editor.scss"
 import { FolderSelect } from "./FolderSelect";
 
+const nService = new NoteService()
+const fService = new FolderService();
+
 export const NoteEditor = () => { 
-  const { id } = useParams()
-  const [newNote, setNewNote] = useState<INewNote>({
+  const { nId } = useParams();
+  const [changeNote, setChangeNote] = useState(false)
+  let orgNote: INote;
+  const [orgText, setOrgText] = useState<string>("")
+  let [orgId, setOrgId] = useState<number>(0);
+
+  const [noteChanges, setNoteChanges] = useState<ICreateNote>({
+    folderId: 0,
     title: "",
     text: ""
-  });
-  const [selectedFolder, setSelectedFolder] = useState<number>(0)
+  })
 
   useEffect(() => {
-    if(id){
-      setSelectedFolder(Number(id))
-    } 
-  }, [id])
+    if(nId){
+      nService.getNoteById(Number(nId))
+      .then(res => {
+        orgNote = res[0];      
+        setChangeNote(true)        
+        setOrgText(orgNote.text)
+        setOrgId(orgNote.id)
+        setNoteChanges({...noteChanges, folderId: orgNote.folderId, title: orgNote.title, text: orgNote.text})
+      })
+    }
+  }, [])
+  function updateNote(e: FormEvent<HTMLFormElement>){
+    console.log("uppdaterar");
+    
+    e.preventDefault()
+    nService.changeNote(orgId, noteChanges)
+    //window.location.assign('/dashboard')
+  }
+
+  function createNote(e: FormEvent<HTMLFormElement>){
+    console.log("ny");
+    
+    e.preventDefault()
+    nService.createNote(noteChanges)
+    //window.location.assign('/')
+  }
 
   return(
     <>
-      <form id="noteEditor">
-        <input type="text" name="title" placeholder="Title" onChange={(e) => {setNewNote({...newNote, title: e.target.value})}}/>
-        <select>
-          <FolderSelect folderId={selectedFolder}/>
-        </select>
-        <ReactQuill onChange={(editor) => {setNewNote({...newNote, text: editor})}}></ReactQuill>
-        <button>Save</button>
-      </form>
-    </>
+      {changeNote &&
+        <section> 
+          <div id="originalNote">{orgText}</div>
+          <div id="changedNote"></div>
+        </section> 
+      }
+      
+        <form id="noteEditor" onSubmit={(e) => {changeNote ? updateNote(e) : createNote(e)}}>
+          <input type="text" value={noteChanges.title} name="title" placeholder="Title" onChange={(e) => {setNoteChanges({...noteChanges, title: e.target.value})}}/>
+          <select value={noteChanges.folderId} onChange={(e) => setNoteChanges({...noteChanges, folderId: Number(e.target.value)})}>
+            <FolderSelect/>
+          </select>
+          <ReactQuill onChange={(editor) => { setNoteChanges({...noteChanges, text: editor})}}></ReactQuill>
+          <button>Save</button>
+        </form>
+      </>
   )
 }

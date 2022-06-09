@@ -36,5 +36,10 @@ export class FolderService{
 
   changeFolder(){}
 
-  deleteFolder(){}
+  deleteFolder(folderId: number){
+    axios.delete(`${url}/delete/${folderId}`)
+    .then(res => {
+      console.log(res);
+    })
+  }
 }

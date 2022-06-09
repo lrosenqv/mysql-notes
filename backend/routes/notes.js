@@ -26,9 +26,9 @@ router.get('/:id', (req, res) => {
 
 //CHANGE note
 router.put('/change/:id', (req, res) => {
-  let sql = `UPDATE notes SET title=? , text=? WHERE id=?`;
+  let sql = `UPDATE notes SET folderId=? , title=? , text=? WHERE id=?`;
 
-  pool.execute(sql, [req.body.title, req.body.text, req.params.id], (err, result) => {
+  pool.execute(sql, [req.body.folderId, req.body.title, req.body.text, req.params.id], (err, result) => {
     if(err){
       console.error(err)
     };

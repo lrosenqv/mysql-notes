@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { IFolder } from "../../models/IFolder";
 import { FolderService } from "../../services/FolderService";
+import { NoteService } from "../../services/NoteService";
 import { UserService } from "../../services/UserService";
 import { FolderCreate } from "../editor/FolderCreate";
 
@@ -27,7 +28,7 @@ export const Folders = () => {
     let createdDate = new Date(folder.createdDate).toLocaleDateString('En-EN', { weekday: "short", month: "long", day: "numeric", year: "2-digit" })
 
     return(<li key={folder.id} className="listItem" onClick={() => openFolder(folder.id)}>
-      <p>{folder.title}</p>
+      <h3>{folder.title}</h3>
       <p>{createdDate}</p>
     </li>)
   })

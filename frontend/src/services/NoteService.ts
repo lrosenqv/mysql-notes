@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ICreateNote } from "../models/ICreateNote";
 import { INewNote } from "../models/INewNote";
 import { INote } from "../models/INote";
 
@@ -29,16 +30,17 @@ export class NoteService{
     return response
   }
 
-  createNote(newNote: INewNote, folderId: string){
-    console.log(newNote, folderId);
-    
-    axios.post<INewNote>(`${url}/f/${folderId}`, newNote)
+  createNote(newNote: ICreateNote){
+    axios.post<INewNote>(`${url}/f/${newNote.folderId}`, {title: newNote.title, text: newNote.text})
     .then(res => {
       console.log(res);
     })
   }
 
-  changeNote(){}
+  changeNote(noteId: number, noteChanges: ICreateNote){
+    axios.put<ICreateNote>(`${url}/change/${noteId}`, noteChanges)
+    .then(res => console.log(res))
+  }
 
   changeFolder(){}
 
