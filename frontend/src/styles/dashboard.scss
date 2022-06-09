@@ -9,6 +9,17 @@
     text-align: center;
   }
 
+  .deleteBtn{
+    align-self: center;
+    font-size: 1rem;
+    transition: all 0.3s;
+    border-radius: 5px 5px;
+
+    &:hover{
+      background-color: rgb(144, 88, 88);
+    }
+  }
+
   .tabs{
     width:100%;
     align-self: flex-start;

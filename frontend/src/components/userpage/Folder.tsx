@@ -61,6 +61,10 @@ export const Folder = () => {
     <section className="dashboard">
     <button className="backBtn" onClick={() => window.location.assign('/dashboard')}>Back to folders</button>
       <h2>{folder.title}</h2>
+      <button className="deleteBtn" onClick={() => {
+        fService.deleteFolder(folder.id)
+        window.location.assign('/dashboard')
+        }}>Delete folder</button>
       <ul id="noteList">
         {printNotes}
       </ul>

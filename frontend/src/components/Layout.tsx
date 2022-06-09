@@ -29,8 +29,8 @@ export const Layout = () => {
     </header>
 
     <main>
-      {!loggedIn && <LoginForm />}
       <Outlet></Outlet>
+      {!loggedIn && <LoginForm />}
     </main>
 
     <footer>lrosenqv 2022</footer>
