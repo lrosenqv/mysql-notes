@@ -4,6 +4,7 @@ import { FolderService } from "../../services/FolderService";
 import { NoteService } from "../../services/NoteService";
 import { UserService } from "../../services/UserService";
 import { FolderCreate } from "../editor/FolderCreate";
+import "../../styles/dashboard.scss"
 
 const fService = new FolderService();
 const uService = new UserService();
@@ -30,14 +31,14 @@ export const Folders = () => {
     return(<li className="folderListItem" key={folder.id} onClick={() => openFolder(folder.id)}>
       <p>{folder.title}</p>
       <div className="detailsHover">
-        <p>Created: {createdDate}</p>
+        <p>{createdDate}</p>
       </div>
     </li>)
   })
 
   return(<>
       <ul id="folderList">
-        <li onClick={() => setCreateOpen(true)} className="folderListItem">
+        <li onClick={() => setCreateOpen(true)} className="folderListItem createNewItem">
           <p>Create new...</p>
         </li>
         {printFolders}
@@ -45,7 +46,7 @@ export const Folders = () => {
     
     {createOpen && 
     <div className="bgBlur">
-      <button className="cancelBtn" onClick={() => setCreateOpen(false)}>Cancel</button>
+      <button className="closeBtn" type="button" onClick={() => setCreateOpen(false)}>Close</button>
       <FolderCreate />
     </div>
     }

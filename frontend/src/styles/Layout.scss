@@ -54,6 +54,7 @@ body{
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
+      gap: 2rem;
 
       .loginForm{
         width: 20%;
@@ -77,10 +78,10 @@ body{
     text-decoration: none;
   }
 
-  
-
   button{
-    color: white;
+    background-color: rgb(69, 81, 97);
+    font-size: 1.1rem;
+    color:white;
     border: none;
     padding: 5px 10px;
     transition: all 0.3s;
@@ -92,21 +93,33 @@ body{
     font-size: 1.1rem;
     color: #ccc;
     text-decoration:underline;
+    text-align: start;
   }
 
   form{
-    display: flex;
+    display:flex;
     flex-direction: column;
-    gap: 10px;
+    background-color: #ccc;
     box-sizing: border-box;
+    border-radius: 10px 10px;
+
+    .saveBtn{
+      align-self: center;
+    }
+
+    select{
+      background-color: rgb(206, 209, 209);
+    }
 
     input{
-      padding: 5px;
+      padding: 8px;
       background-color: #ccc;
-      border: none;
+      border: 1px solid rgb(69, 81, 97);
+      font-weight: bold;
+      font-size: 1.1rem;
       
       &::placeholder{
-        color: rgb(85, 85, 85);
+        color: rgb(69, 81, 97);
         font-style: italic;
         text-transform: lowercase;
       }

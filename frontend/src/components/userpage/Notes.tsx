@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import { INote } from "../../models/INote"
 import { NoteService } from "../../services/NoteService"
 import { UserService } from "../../services/UserService";
-import { FolderSelect } from "../editor/FolderSelect";
 import { NoteEditor } from "../editor/NoteEditor"
 import { Note } from "./Note";
 
@@ -30,19 +29,22 @@ export const Notes = () => {
   },[])
 
   let noteList = notes?.map(note => {
+    let createdDate = new Date(note.createdDate).toLocaleDateString('En-EN', { weekday: "short", month: "long", day: "numeric", year: "2-digit" })
     return (
     <li key={note.id} className="noteListItem" onClick={() => {
       setNoteOpen(true)
       setShowNote(note)
-    }}>
-        <p>{note.title}</p>
+    }}><p>{note.title}</p>
+      <div className="detailsHover">
+        <p>{createdDate}</p>
+      </div>
     </li>
     )
   })
 
   return(<>
     <ul id="noteList">
-      <li className="noteListItem" onClick={() => setEditorOpen(true)}>
+      <li className="noteListItem createNewItem" onClick={() => setEditorOpen(true)}>
         <p>Create new...</p>
       </li>
       {noteList}

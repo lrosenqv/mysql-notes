@@ -14,7 +14,7 @@ export const Note = (props: INoteProps) => {
   
   function deleteNote(){
     nService.deleteNote(note.id)
-    window.location.assign('/notes')
+    window.location.assign('/dashboard/notes')
   }
 
   return(<>

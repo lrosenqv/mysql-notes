@@ -1,9 +1,13 @@
-#dashboard{
+#dashboard, .dashboard{
   padding: 0 3rem;
   width:85%;
   box-sizing: border-box;
   display:flex;
   flex-direction: column;
+
+  h2{
+    text-align: center;
+  }
 
   .tabs{
     width:100%;
@@ -50,8 +54,33 @@
       transition: all 0.4s;
       cursor: pointer;
 
+      p{
+        height: 75%;
+        margin: 3rem 0 0;
+        box-sizing: border-box;
+      }
+  
+      .detailsHover{
+        height: 20px;
+        position: relative;
+        bottom: -3rem;
+        font-size: 0.9rem;
+        font-style: italic;
+        font-weight: normal; 
+        transition:all 0.3s;
+        color:white;
+  
+        p{
+          margin: 0;
+        }
+      }
+
       &:hover{
         transform:scale(1.1);
+        
+        .detailsHover{
+          bottom: 0;
+        }
       }
     }
   }
@@ -61,39 +90,23 @@
     color: white;
     transition: all 0.2s;
     overflow: hidden;
-
-    p{
-      height: 75%;
-      margin: 3rem 0 0;
-      box-sizing: border-box;
-    }
-
-    .detailsHover{
-      height: 20px;
-      position: relative;
-      bottom: -3rem;
-      font-size: 0.9rem;
-      font-style: italic;
-      font-weight: normal; 
-      transition:all 0.3s;
-      color:rgb(69, 81, 97);
-
-      p{
-        margin: 0;
-      }
-    }
-
-    &:hover{
-      .folderDetailsHover{
-        color:white;
-        bottom:0;
-      }
-    }
   }
   
   .noteListItem{
     background-color: #ccc;
-    color: rgb(45, 45, 48);
+    color: rgb(69, 81, 97);
+    overflow: hidden;
+
+    .detailsHover{
+      p{
+        color: rgb(69, 81, 97);
+      }
+    }
+  }
+
+  .createNewItem{
+    background-color: rgb(144, 144, 164);
+    color:white;
   }
 }
 

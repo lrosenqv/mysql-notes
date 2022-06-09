@@ -8,9 +8,7 @@ import { Layout } from './components/Layout';
 import { Dashboard } from './components/userpage/Dashboard';
 import { NotFound } from './components/NotFound';
 import { Folder } from './components/userpage/Folder';
-import { Note } from './components/userpage/Note';
 import { Notes } from './components/userpage/Notes';
-import { Folders } from './components/userpage/Folders';
 import { NoteEditor } from './components/editor/NoteEditor';
 
 const root = ReactDOM.createRoot(
@@ -23,7 +21,6 @@ root.render(
         <Route path="/" element={<Layout />}>
           <Route index element={<App />} />
           <Route path="/dashboard" element={<Dashboard />}>
-            <Route path="/dashboard/folders" element={<Folders />} />
             <Route path="/dashboard/notes" element={<Notes />} />
           </Route>
           <Route path="/folder/:id" element={<Folder/>} />

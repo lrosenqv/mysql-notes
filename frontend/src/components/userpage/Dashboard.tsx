@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Folders } from "./Folders"
 import { Notes } from "./Notes"
 import "../../styles/dashboard.scss"
@@ -6,7 +6,15 @@ import "../../styles/dashboard.scss"
 export const Dashboard = () => {
   const [showFolders, setShowFolders] = useState(true)
   const [showNotes, setShowNotes] = useState(false)
-  
+
+  useEffect(() => {
+    if(window.location.href.endsWith("notes")){
+      setShowNotes(true)
+      setShowFolders(false)
+    }
+  }, [])
+
+
   return(<>
   <section id="dashboard">
     <div className="tabs">

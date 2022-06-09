@@ -60,12 +60,14 @@ export const NoteEditor = () => {
       }
       
         <form id="noteEditor" onSubmit={(e) => {changeNote ? updateNote(e) : createNote(e)}}>
-          <input type="text" value={noteChanges.title} name="title" placeholder="Title" onChange={(e) => {setNoteChanges({...noteChanges, title: e.target.value})}}/>
-          <select value={noteChanges.folderId} onChange={(e) => setNoteChanges({...noteChanges, folderId: Number(e.target.value)})}>
-            <FolderSelect/>
-          </select>
+          <div className="input-select-wrapper">
+            <input type="text" value={noteChanges.title} name="title" placeholder="Title" onChange={(e) => {setNoteChanges({...noteChanges, title: e.target.value})}}/>
+            <select value={noteChanges.folderId} onChange={(e) => setNoteChanges({...noteChanges, folderId: Number(e.target.value)})}>
+              <FolderSelect/>
+            </select>
+          </div>
           <ReactQuill onChange={(editor) => { setNoteChanges({...noteChanges, text: editor})}}></ReactQuill>
-          <button>Save</button>
+          <button className="saveBtn" type="submit">Save</button>
         </form>
       </>
   )

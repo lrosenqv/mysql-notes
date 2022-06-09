@@ -46,17 +46,21 @@ export const Folder = () => {
   }, [id, noteOpen])
   
   let printNotes = notes?.map(note => {
+    let createdDate = new Date(note.createdDate).toLocaleDateString('En-EN', { weekday: "short", month: "long", day: "numeric", year: "2-digit" })
     return(
-      <li key={note.id} id={note.id.toString()} className="noteListItem" onClick={() => {setNoteOpen(true); setShowNote(note)}}>
+      <li key={note.id} className="noteListItem" onClick={() => {setNoteOpen(true); setShowNote(note)}}>
         <p>{note.title}</p>
+        <div className="detailsHover">
+        <p>{createdDate}</p>
+      </div>
       </li>
     )
   })
 
   return(<>
-    <section>
+    <section className="dashboard">
+    <button className="backBtn" onClick={() => window.location.assign('/dashboard')}>Back to folders</button>
       <h2>{folder.title}</h2>
-      <button className="backBtn" onClick={() => window.location.assign('/dashboard/folders')}>Back to folders</button>
       <ul id="noteList">
         {printNotes}
       </ul>
@@ -65,7 +69,7 @@ export const Folder = () => {
     {noteOpen && 
       <div className="bgBlur">
         <Note note={showNote} />
-        <button className="closeBtn" type="button" onClick={() => setNoteOpen(false)}>X</button>
+        <button className="closeBtn" type="button" onClick={() => setNoteOpen(false)}>Close</button>
       </div>
     }
   </>)
