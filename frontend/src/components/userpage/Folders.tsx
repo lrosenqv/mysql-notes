@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
 import { IFolder } from "../../models/IFolder";
 import { FolderService } from "../../services/FolderService";
-import { NoteService } from "../../services/NoteService";
 import { UserService } from "../../services/UserService";
 import { FolderCreate } from "../editor/FolderCreate";
 import "../../styles/dashboard.scss"
 
 const fService = new FolderService();
 const uService = new UserService();
-const nService = new NoteService();
 
 export const Folders = () => {
   const [folders, setFolders] = useState<IFolder[]>();
@@ -16,7 +14,7 @@ export const Folders = () => {
 
   useEffect(() => {
     let userId = uService.getLSKey()
-    fService.getUserFolders(userId)
+    fService.getFoldersByUser(userId)
     .then(res => {
       setFolders(res)      
     })

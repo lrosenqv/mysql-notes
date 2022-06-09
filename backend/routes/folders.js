@@ -46,7 +46,8 @@ router.post('/u/:userId', (req, res) => {
     if(err){
       console.error(err);
     }
-    res.status(200).send(result)
+    console.log(result);
+    res.status(200).json(result.insertId)
   })
 });
 

@@ -14,7 +14,6 @@ export const Dashboard = () => {
     }
   }, [])
 
-
   return(<>
   <section id="dashboard">
     <div className="tabs">

@@ -9,7 +9,6 @@ import { Note } from "./Note"
 
 const nService = new NoteService()
 const fService = new FolderService();
-const uService = new UserService();
 
 export const Folder = () => {
   const { id } = useParams();
@@ -32,7 +31,7 @@ export const Folder = () => {
   });
 
   useEffect(() => {
-    nService.getFolderNotes(folderId)
+    nService.getNotesByFolder(folderId)
     .then(data => {
       setNotes(data)
     })

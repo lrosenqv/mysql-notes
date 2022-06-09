@@ -6,12 +6,13 @@ import { UserService } from "../../services/UserService"
 const fService = new FolderService()
 const uService = new UserService()
 
+//Get all folders for select in form
 export const FolderSelect = () => {
   const [folders, setFolders] = useState<IFolder[]>()
   
   useEffect(() => {
     let userId = uService.getLSKey()
-    fService.getUserFolders(userId)
+    fService.getFoldersByUser(userId)
     .then(res => {
       setFolders(res)
     })

@@ -39,7 +39,7 @@ export const NoteEditor = () => {
       })
     } else {
       let userId = uService.getLSKey()
-      fService.getUserFolders(userId)
+      fService.getFoldersByUser(userId)
       .then(res => {
         setNoteChanges({...noteChanges, folderId: res[0].id})
       })

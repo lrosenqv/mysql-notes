@@ -1,10 +1,10 @@
 import { ChangeEvent, SyntheticEvent, useState } from "react"
-import { ILogin } from "../models/ILogin"
+import { IUserLogin } from "../models/IUserLogin"
 import { UserService } from "../services/UserService"
 const service = new UserService()
 
 export const LoginForm = () => {
-  const [loginValues, setLoginValues] = useState<ILogin>({
+  const [loginValues, setLoginValues] = useState<IUserLogin>({
     email: "",
     password: "",
   })

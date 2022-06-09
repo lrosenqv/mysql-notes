@@ -1,5 +1,5 @@
 import axios from "axios";
-import { INewUser } from "../models/INewUser";
+import { IUserLogin } from "../models/IUserLogin";
 
 const url = 'http://localhost:4000/users'
 
@@ -7,7 +7,6 @@ export class UserService{
   //Get userId from local storage
   getLSKey(){
     let ls = localStorage.getItem('onlineUserKey') || "";
-
     if(ls){
       ls = JSON.parse(ls)
     }
@@ -35,10 +34,10 @@ export class UserService{
     return response
   }
 
-  /*
+  /* Not implemented in app yet 
   //Create new user
-  createUser(user: INewUser){
-    axios.post<INewUser>(`${url}`, user)
+  createUser(user: IUserLogin){
+    axios.post<IUserLogin>(`${url}`, user)
     .then(res => {
       console.log(res.data);
     })
