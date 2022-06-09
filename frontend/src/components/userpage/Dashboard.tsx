@@ -8,7 +8,7 @@ export const Dashboard = () => {
   const [showNotes, setShowNotes] = useState(false)
   
   return(<>
-  <section>
+  <section id="dashboard">
     <div className="tabs">
       <button type="button" onClick={() => {
         setShowFolders(true); 

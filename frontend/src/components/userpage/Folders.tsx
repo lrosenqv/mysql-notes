@@ -29,7 +29,7 @@ export const Folders = () => {
     let createdDate = new Date(folder.createdDate).toLocaleDateString('En-EN', { weekday: "short", month: "long", day: "numeric", year: "2-digit" })
     return(<li className="folderListItem" key={folder.id} onClick={() => openFolder(folder.id)}>
       <p>{folder.title}</p>
-      <div className="folderDetailsHover">
+      <div className="detailsHover">
         <p>Created: {createdDate}</p>
       </div>
     </li>)

@@ -20,7 +20,6 @@ export const Notes = () => {
     createdDate: new Date()
   });
   const [noteOpen, setNoteOpen] = useState(false);
-  const [selectedFolder, setSelectedFolder] = useState<number>(0);
 
   useEffect(() => {
     let userId = uService.getLSKey() 
@@ -28,18 +27,13 @@ export const Notes = () => {
     .then(res => {
       setNotes(res)
     })
-
-    if(showNote){
-      setSelectedFolder(showNote.folderId)
-    }
-  },[noteOpen, showNote, selectedFolder])
+  },[])
 
   let noteList = notes?.map(note => {
     return (
     <li key={note.id} className="noteListItem" onClick={() => {
       setNoteOpen(true)
       setShowNote(note)
-      setSelectedFolder(note.folderId)
     }}>
         <p>{note.title}</p>
     </li>
@@ -55,22 +49,15 @@ export const Notes = () => {
     </ul>
     
     {editorOpen && <div className="bgBlur newNoteForm">
-      <button onClick={() => setEditorOpen(false)}>Close</button>
+      <button className="closeBtn" onClick={() => setEditorOpen(false)}>Close</button>
       <NoteEditor/> 
     </div>}
 
 
     {noteOpen && 
       <div className="bgBlur">
-        <div className="select-btn-wrapper">
-          <button className="closeBtn" type="button" onClick={() => setNoteOpen(false)}>Close</button>
-          <select name="folderId" className="folderSelect" value={selectedFolder} onChange={(e) => {setSelectedFolder(Number(e.target.value))}}>{<FolderSelect/>}</select>
-          <button id="saveFchangeBtn" onClick={(e) => {
-            nService.changeFolder(showNote.id, selectedFolder)
-            window.location.assign(`/folder/${selectedFolder}`)
-          }}>Save</button>
-        </div>
         <Note note={showNote} />
+        <button className="closeBtn" type="button" onClick={() => setNoteOpen(false)}>Close</button>
       </div>
     }
   </>)

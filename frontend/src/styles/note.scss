@@ -63,14 +63,14 @@
 }
 
 .select-btn-wrapper{
-  margin-top: 6rem;
   display: grid;
-  grid-template-columns: repeat(11, 1fr);
+  grid-template-columns: repeat(8, 1fr);
   width:45%;
   justify-content: center;
+  column-gap: 0.4rem;
 
   .folderSelect{
-    grid-column: 8/ span 4;
+    grid-column: 1/ span 3;
     position: relative;
     background-color: transparent;
     color: #ccc;
@@ -80,16 +80,29 @@
     cursor: pointer;
   }
 
-  .closeBtn{
-    grid-column: 6;
-    background-color: rgb(70, 65, 84);
-    border-radius: 3px 3px;
-    font-size: 1rem;
-    font-weight: bold;
-    transition: all 0.2s;
-  
+  button{
+    grid-column: 4;
+    padding:4px 4px;
+    background-color: rgb(69, 97, 76);
+    border-radius: 5px 5px;
+
     &:hover{
-      background-color: rgb(84, 79, 97);;
+      background-color: rgb(62, 81, 67);
     }
+  }
+}
+
+.closeBtn{
+  border-radius: 3px 3px;
+  font-size: 1rem;
+  transition: all 0.2s;
+  background-color: transparent;
+  font-weight: bold;
+  font-size:2rem;
+  margin-top: 4rem;
+
+  &:hover{
+    background-color: rgb(84, 79, 97);
+    transform: scale(1.1);
   }
 }

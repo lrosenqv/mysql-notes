@@ -22,11 +22,13 @@ export const Layout = () => {
   return(<>
     <header>
       <h1><Link to="/">MySQL - Notes</Link></h1>
-      {loggedIn && <button className="logoutBtn" type="submit" onClick={logout}>Log out</button>}
+      {loggedIn && <nav>
+        <a role="button" href="/dashboard" id="dashboardBtn">My dashboard</a>
+        <button className="logoutBtn" type="submit" onClick={logout}>Log out</button>
+      </nav>}
     </header>
 
     <main>
-      {loggedIn && <a href="/dashboard" id="dashboardLink">My dashboard</a>}
       {!loggedIn && <LoginForm />}
       <Outlet></Outlet>
     </main>
