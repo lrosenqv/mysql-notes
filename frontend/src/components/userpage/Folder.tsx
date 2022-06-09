@@ -4,10 +4,12 @@ import { IFolder } from "../../models/IFolder"
 import { INote } from "../../models/INote"
 import { FolderService } from "../../services/FolderService"
 import { NoteService } from "../../services/NoteService"
+import { UserService } from "../../services/UserService"
 import { Note } from "./Note"
 
 const nService = new NoteService()
 const fService = new FolderService();
+const uService = new UserService();
 
 export const Folder = () => {
   const { id } = useParams();
@@ -61,7 +63,7 @@ export const Folder = () => {
     <section className="dashboard">
     <button className="backBtn" onClick={() => window.location.assign('/dashboard')}>Back to folders</button>
       <h2>{folder.title}</h2>
-      <button className="deleteBtn" onClick={() => {
+      <button className="deleteFolderBtn" onClick={() => {
         fService.deleteFolder(folder.id)
         window.location.assign('/dashboard')
         }}>Delete folder</button>

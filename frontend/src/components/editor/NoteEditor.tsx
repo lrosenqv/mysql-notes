@@ -6,10 +6,13 @@ import { ICreateNote } from "../../models/ICreateNote";
 import { INote } from "../../models/INote";
 import { FolderService } from "../../services/FolderService";
 import { NoteService } from "../../services/NoteService";
+import { UserService } from "../../services/UserService";
 import "../../styles/editor.scss"
 import { FolderSelect } from "./FolderSelect";
 
-const nService = new NoteService()
+const nService = new NoteService();
+const uService = new UserService();
+const fService = new FolderService();
 
 export const NoteEditor = () => { 
   const { nId } = useParams();
@@ -34,8 +37,15 @@ export const NoteEditor = () => {
         setOrgId(orgNote.id)
         setNoteChanges({...noteChanges, folderId: orgNote.folderId, title: orgNote.title, text: orgNote.text})
       })
+    } else {
+      let userId = uService.getLSKey()
+      fService.getUserFolders(userId)
+      .then(res => {
+        setNoteChanges({...noteChanges, folderId: res[0].id})
+      })
     }
-  }, [])
+  }, [nId])
+
   function updateNote(e: FormEvent<HTMLFormElement>){
     e.preventDefault()
     nService.changeNote(orgId, noteChanges)

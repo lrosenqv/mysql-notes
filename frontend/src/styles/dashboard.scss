@@ -9,7 +9,7 @@
     text-align: center;
   }
 
-  .deleteBtn{
+  .deleteFolderBtn{
     align-self: center;
     font-size: 1rem;
     transition: all 0.3s;
@@ -48,6 +48,7 @@
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 2rem;
+
 
     .folderListItem, .noteListItem{
       box-sizing: border-box;
