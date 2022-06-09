@@ -1,48 +1,100 @@
 .tabs{
-  margin-top: 2rem;
-  width:100%;
+  padding: 0 3rem;
+  box-sizing: border-box;
 
   button{
     font-size: 1.2rem;
+    font-weight: bold;
     padding: 0.5rem 1.5rem;
     width: 50%;
+    background-color:transparent;
+    transition: all 0.2s;
 
     &.active{
-      background-color: rgb(133, 163, 148);
+      border-bottom: 2px solid rgb(245, 245, 245);;
     }
   }
 }
-
 section{
-  width: 90%;
+  padding: 0 3rem;
+  width:100%;
+  box-sizing: border-box;
 
-  ul{
+  #folderList, #noteList{
     list-style-type: none;
     box-sizing: border-box;
     margin:0;
     padding: 3rem;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    align-content: stretch;
     gap: 2rem;
 
-    li{
+    .folderListItem, .noteListItem{
       box-sizing: border-box;
       width: 100%;
       height: 10rem;
-      background-color: rgb(105, 128, 130);
-      border-radius: 20px 20px;
-      font-size: 1.1rem;
+      padding: 1rem;
+      border-radius: 10px 10px;
+      font-size: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       text-align: center;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: all 0.4s;
       cursor: pointer;
+
+      &:hover{
+        transform:scale(1.1);
+      }
 
       button{
         border-radius: 25px 25px;
       }
     }
   }
-}
 
+  .folderListItem{
+    background-color: rgb(69, 81, 97);
+    color: white;
+    transition: all 0.2s;
+    overflow: hidden;
+
+    p{
+      height: 75%;
+      margin: 3rem 0 0;
+      box-sizing: border-box;
+    }
+
+    .folderDetailsHover{
+      height: 20px;
+      position: relative;
+      bottom: -3rem;
+      font-size: 0.9rem;
+      font-style: italic;
+      font-weight: normal; 
+      transition:all 0.3s;
+      color:rgb(69, 81, 97);
+
+      p{
+        margin: 0;
+      }
+    }
+
+    &:hover{
+      .folderDetailsHover{
+        color:white;
+        bottom:0;
+      }
+    }
+  }
+  
+  .noteListItem{
+    background-color: #ccc;
+    color: rgb(45, 45, 48);
+  }
+}
 .ql-toolbar:first-of-type{
   display: none;
 }

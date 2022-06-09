@@ -42,7 +42,26 @@ export class NoteService{
     .then(res => console.log(res))
   }
 
-  changeFolder(){}
+  changeFolder(noteId: number, newFolderId: number){
+    let response = axios.put(`${url}/switchFolder/${noteId}`, {folderId: newFolderId})
+    .then(res => {
+      console.log(res);
+      
+      return res
+    })
+    .catch(err => console.error(err)
+    )
+    console.log(response);
+    
+    return response
+  }
 
-  deleteNote(){}
+  deleteNote(noteId: number){
+    axios.delete(`${url}/delete/${noteId}`)
+    .then(res => {
+      console.log(res.data);
+      console.log(res.statusText);
+      
+    })
+  }
 }

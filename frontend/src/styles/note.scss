@@ -1,12 +1,12 @@
 .note{
   background-color: #ccc;
-  width: 45%;
+  min-width: 45%;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   text-align: center;
   color: rgb(19, 19, 21);
   position: relative;
-  top: -14rem;
   border-radius: 8px 8px;
 
   .noteDetails{
@@ -33,31 +33,63 @@
     padding: 2rem 3rem 3rem;
   }
 
-  .editBtn{
-    background-color: rgb(69, 81, 97);
+  .noteBtns{
+    box-sizing: border-box;
+    position:relative;
     align-self: flex-end;
-    position: relative;
-    border-top-right-radius: 8px;
-    border-bottom-left-radius: 8px;
-    transition: all 0.3s;
-    padding: 0.4rem 0.5rem;
 
-    &:hover{
-      background-color: rgb(57, 68, 82);
+    .editBtn {
+      background-color: rgb(69, 81, 97);
+      padding: 0.5rem 0.6rem;
+      transition: all 0.3s;
+      border-bottom-left-radius: 8px;
+    
+      &:hover{
+        background-color: rgb(57, 68, 82);
+      }
+    }
+  
+    .deleteBtn {
+      background-color: rgb(65, 65, 65);
+      border-top-right-radius: 8px;
+      padding: 0.5rem 0.6rem;
+      transition: all 0.3s;
+    
+      &:hover{
+        background-color: rgb(144, 88, 88);
+      }
     }
   }
 }
 
-.closeBtn{
-  position: absolute;
-  top: 4rem;
-  background-color: rgb(70, 65, 84);
-  border-radius: 3px 3px;
-  font-size: 1rem;
-  font-weight: bold;
-  transition: all 0.2s;
+.select-btn-wrapper{
+  margin-top: 6rem;
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  width:45%;
+  justify-content: center;
 
-  &:hover{
-    background-color: rgb(84, 79, 97);;
+  .folderSelect{
+    grid-column: 8/ span 4;
+    position: relative;
+    background-color: transparent;
+    color: #ccc;
+    font-weight: bold;
+    padding: 6px 8px;
+    border-radius: 8px 8px;
+    cursor: pointer;
+  }
+
+  .closeBtn{
+    grid-column: 6;
+    background-color: rgb(70, 65, 84);
+    border-radius: 3px 3px;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: all 0.2s;
+  
+    &:hover{
+      background-color: rgb(84, 79, 97);;
+    }
   }
 }

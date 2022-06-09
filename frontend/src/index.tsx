@@ -22,7 +22,10 @@ root.render(
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<App />} />
-          <Route path="/dashboard" element={<Dashboard />}/>
+          <Route path="/dashboard" element={<Dashboard />}>
+            <Route path="/dashboard/folders" element={<Folders />} />
+            <Route path="/dashboard/notes" element={<Notes />} />
+          </Route>
           <Route path="/folder/:id" element={<Folder/>} />
           <Route path="/editor/:nId" element={<NoteEditor/>} />
           <Route path="*" element={<NotFound />} />

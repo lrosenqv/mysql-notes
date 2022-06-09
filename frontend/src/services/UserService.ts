@@ -35,6 +35,7 @@ export class UserService{
     return response
   }
 
+  /*
   //Create new user
   createUser(user: INewUser){
     axios.post<INewUser>(`${url}`, user)
@@ -44,4 +45,5 @@ export class UserService{
     .catch(err => { console.error(err);
     })
   }
+  */
 }

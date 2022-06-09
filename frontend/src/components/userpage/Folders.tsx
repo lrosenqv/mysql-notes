@@ -7,6 +7,7 @@ import { FolderCreate } from "../editor/FolderCreate";
 
 const fService = new FolderService();
 const uService = new UserService();
+const nService = new NoteService();
 
 export const Folders = () => {
   const [folders, setFolders] = useState<IFolder[]>();
@@ -24,18 +25,19 @@ export const Folders = () => {
     window.location.assign(`/folder/${id}`)
   }
 
-  let printFolders = folders?.map(folder => {
+  let printFolders = folders?.map(folder => { 
     let createdDate = new Date(folder.createdDate).toLocaleDateString('En-EN', { weekday: "short", month: "long", day: "numeric", year: "2-digit" })
-
-    return(<li key={folder.id} className="listItem" onClick={() => openFolder(folder.id)}>
-      <h3>{folder.title}</h3>
-      <p>{createdDate}</p>
+    return(<li className="folderListItem" key={folder.id} onClick={() => openFolder(folder.id)}>
+      <p>{folder.title}</p>
+      <div className="folderDetailsHover">
+        <p>Created: {createdDate}</p>
+      </div>
     </li>)
   })
 
   return(<>
-      <ul>
-        <li onClick={() => setCreateOpen(true)} className="listItem">
+      <ul id="folderList">
+        <li onClick={() => setCreateOpen(true)} className="folderListItem">
           <p>Create new...</p>
         </li>
         {printFolders}

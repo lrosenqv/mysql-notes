@@ -6,7 +6,13 @@ let url = "http://localhost:4000/folders"
 let userId = localStorage.getItem('onlineUserKey') || "";
 
 export class FolderService{
-  getFolderById(){}
+  async getFolderById(folderId: number){
+    let response = await axios.get<IFolder[]>(`${url}/${folderId}`)
+      .then(res => {
+        return res.data
+      })
+    return response
+  }
 
   async getUserFolders(userId: number){
     let response = axios.get<IFolder[]>(`${url}/u/${userId}`)
@@ -33,8 +39,6 @@ export class FolderService{
     })
     return response
   }
-
-  changeFolder(){}
 
   deleteFolder(folderId: number){
     axios.delete(`${url}/delete/${folderId}`)

@@ -10,7 +10,6 @@ import "../../styles/editor.scss"
 import { FolderSelect } from "./FolderSelect";
 
 const nService = new NoteService()
-const fService = new FolderService();
 
 export const NoteEditor = () => { 
   const { nId } = useParams();
@@ -38,27 +37,25 @@ export const NoteEditor = () => {
     }
   }, [])
   function updateNote(e: FormEvent<HTMLFormElement>){
-    console.log("uppdaterar");
-    
     e.preventDefault()
     nService.changeNote(orgId, noteChanges)
-    //window.location.assign('/dashboard')
+    window.location.assign(`/folder/${noteChanges.folderId}`)
   }
 
   function createNote(e: FormEvent<HTMLFormElement>){
-    console.log("ny");
-    
     e.preventDefault()
     nService.createNote(noteChanges)
-    //window.location.assign('/')
+    window.location.assign('/dashboard/notes')
   }
-
+  
   return(
     <>
       {changeNote &&
-        <section> 
-          <div id="originalNote">{orgText}</div>
-          <div id="changedNote"></div>
+        <section id="showNoteChanges"> 
+          <h2>Original</h2>
+          <div id="originalNote" dangerouslySetInnerHTML={{__html: orgText}}></div>
+          <h2>With changes</h2>
+          <div id="changedNote" dangerouslySetInnerHTML={{__html: noteChanges.text}}></div>
         </section> 
       }
       
