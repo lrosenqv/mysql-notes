@@ -4,7 +4,6 @@ import { IFolder } from "../../models/IFolder"
 import { INote } from "../../models/INote"
 import { FolderService } from "../../services/FolderService"
 import { NoteService } from "../../services/NoteService"
-import { UserService } from "../../services/UserService"
 import { Note } from "./Note"
 
 const nService = new NoteService()
@@ -17,7 +16,7 @@ export const Folder = () => {
     id: 0,
     userId: 0,
     title: "",
-    createdDate: new Date
+    createdDate: new Date()
   })
 
   const [notes, setNotes] = useState<INote[]>();
@@ -31,20 +30,17 @@ export const Folder = () => {
   });
 
   useEffect(() => {
-    nService.getNotesByFolder(folderId)
-    .then(data => {
-      setNotes(data)
-    })
-  }, [folderId])
-
-  useEffect(() => {
     if(id){
       fService.getFolderById(folderId)
         .then(res => {
         setFolder(res[0])
       })
+    nService.getNotesByFolder(folderId)
+      .then(data => {
+        setNotes(data)
+      })
     }
-  }, [id, noteOpen])
+  }, [id, noteOpen, folderId])
   
   let printNotes = notes?.map(note => {
     let createdDate = new Date(note.createdDate).toLocaleDateString('En-EN', { weekday: "short", month: "long", day: "numeric", year: "2-digit" })

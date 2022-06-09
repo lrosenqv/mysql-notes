@@ -35,17 +35,11 @@ export class FolderService{
   }
 
   //Create new folder
-  async createFolder(newFolder: NewFolder){
-    let response = await axios.post<NewFolder>(`${url}/u/${JSON.parse(userId)}`, newFolder)
+  createFolder(newFolder: NewFolder){
+    axios.post<NewFolder>(`${url}/u/${JSON.parse(userId)}`, newFolder)
     .then(res => {
-      return res.data
+      console.log(res.data);
     })
-    .catch(err => {
-      console.error(err);
-    })
-    console.log(response);
-    
-    return response
   }
 
   //Delete folder

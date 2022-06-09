@@ -1,5 +1,4 @@
 import axios from "axios";
-import { IUserLogin } from "../models/IUserLogin";
 
 const url = 'http://localhost:4000/users'
 
