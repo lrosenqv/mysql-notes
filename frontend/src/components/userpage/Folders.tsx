@@ -37,15 +37,15 @@ export const Folders = () => {
   return(<>
       <ul id="folderList">
         <li onClick={() => setCreateOpen(true)} className="folderListItem createNewItem">
-          <p>Create new...</p>
+          <p>...New Folder</p>
         </li>
         {printFolders}
       </ul>
     
     {createOpen && 
     <div className="bgBlur">
-      <button className="closeBtn" type="button" onClick={() => setCreateOpen(false)}>Close</button>
       <FolderCreate />
+      <button className="closeBtn" type="button" onClick={() => setCreateOpen(false)}>Close</button>
     </div>
     }
   </>)

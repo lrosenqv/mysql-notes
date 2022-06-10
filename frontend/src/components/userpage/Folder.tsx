@@ -4,6 +4,7 @@ import { IFolder } from "../../models/IFolder"
 import { INote } from "../../models/INote"
 import { FolderService } from "../../services/FolderService"
 import { NoteService } from "../../services/NoteService"
+import { NoteEditor } from "../editor/NoteEditor"
 import { Note } from "./Note"
 
 const nService = new NoteService()
@@ -21,6 +22,7 @@ export const Folder = () => {
 
   const [notes, setNotes] = useState<INote[]>();
   const [noteOpen, setNoteOpen] = useState(false);
+  const [editorOpen, setEditorOpen] = useState(false);
   const [showNote, setShowNote] = useState<INote>({
     id: 0,
     folderId: 0,
@@ -50,7 +52,7 @@ export const Folder = () => {
         <div className="detailsHover">
         <p>{createdDate}</p>
       </div>
-      </li>
+    </li>
     )
   })
 
@@ -61,8 +63,11 @@ export const Folder = () => {
       <button className="deleteFolderBtn" onClick={() => {
         fService.deleteFolder(folder.id)
         window.location.assign('/dashboard')
-        }}>Delete folder</button>
+      }}>Delete folder</button>
       <ul id="noteList">
+        <li className="noteListItem createNewItem" onClick={() => setEditorOpen(true)}>
+          <p>...New Note</p>
+        </li>
         {printNotes}
       </ul>
     </section>
@@ -71,6 +76,13 @@ export const Folder = () => {
       <div className="bgBlur">
         <Note note={showNote} />
         <button className="closeBtn" type="button" onClick={() => setNoteOpen(false)}>Close</button>
+      </div>
+    }
+
+    {editorOpen &&
+      <div className="bgBlur">
+        <NoteEditor />
+        <button className="closeBtn" type="button" onClick={() => setEditorOpen(false)}>Close</button>
       </div>
     }
   </>)

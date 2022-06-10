@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link, Outlet } from "react-router-dom"
 import { LoginForm } from "./LoginForm"
-import "../styles/Layout.scss"
+import "../styles/layout.scss"
 
 export const Layout = () => {
   const [loggedIn, setLoggedIn] = useState(false)

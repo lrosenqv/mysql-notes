@@ -45,14 +45,14 @@ export const Notes = () => {
   return(<>
     <ul id="noteList">
       <li className="noteListItem createNewItem" onClick={() => setEditorOpen(true)}>
-        <p>Create new...</p>
+        <p>...New Note</p>
       </li>
       {noteList}
     </ul>
     
     {editorOpen && <div className="bgBlur newNoteForm">
+      <NoteEditor/>
       <button className="closeBtn" onClick={() => setEditorOpen(false)}>Close</button>
-      <NoteEditor/> 
     </div>}
 
 

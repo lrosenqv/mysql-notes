@@ -40,8 +40,9 @@
 
     .editBtn {
       background-color: rgb(69, 81, 97);
-      padding: 0.5rem 0.6rem;
-      transition: all 0.3s;
+      padding: 0.4rem 0.5rem;
+      border-radius: 0 0;
+      font-size: 0.9rem;
       border-bottom-left-radius: 8px;
     
       &:hover{
@@ -51,9 +52,10 @@
   
     .deleteBtn {
       background-color: rgb(65, 65, 65);
+      border-radius:0 0;
+      font-size: 0.9rem;
       border-top-right-radius: 8px;
-      padding: 0.5rem 0.6rem;
-      transition: all 0.3s;
+      padding: 0.4rem 0.5rem;
     
       &:hover{
         background-color: rgb(144, 88, 88);
@@ -72,17 +74,18 @@
   .folderSelect{
     grid-column: 1/ span 3;
     position: relative;
-    background-color: transparent;
-    color: #ccc;
+    background-color: #ccc;
+    color: rgb(69, 81, 97);
     font-weight: bold;
     padding: 6px 8px;
-    border-radius: 8px 8px;
+    border-radius: 5px 5px;
     cursor: pointer;
   }
 
   button{
     grid-column: 4;
-    padding:4px 4px;
+    font-size: 0.9rem;
+    padding:3px 4px;
     background-color: rgb(69, 97, 76);
     border-radius: 5px 5px;
 

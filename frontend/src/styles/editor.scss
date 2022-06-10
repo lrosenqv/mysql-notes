@@ -1,32 +1,18 @@
 #noteEditor{
-  box-sizing: border-box;
   width: 65%;
-  padding: 2rem 2rem 2rem;
+  padding: 2rem 2rem 1.5rem;
   gap: 1.1rem 1.8rem;
 
   select{
     width: 35%;
     justify-self: flex-end;
-    background-color: #ccc;
-    color: rgb(69, 81, 97);
-    border: 1.3px solid rgb(69, 81, 97);
-    font-weight: bold;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    font-size: 1.1rem;
-    cursor: pointer;
   }
 
   input{
-    margin-left: 2px;
-    background-color: #ccc;
-    border: 1.3px solid rgb(69, 81, 97);
     font-size: 1.3rem;
     font-weight: bold;
     width: 60%;
     align-self: flex-start;
-    color: rgb(69, 81, 97);
   }
 
   .input-select-wrapper{
@@ -36,7 +22,10 @@
  
   .saveBtn{
     align-self: flex-end;
-    margin-top:2.5rem;
+
+    &:hover{
+      background-color: rgb(55, 66, 79);;
+    }
   }
 
   .quill{
@@ -49,10 +38,6 @@
       border-right: 1px solid rgb(69, 81, 97);
       border-top: 1px solid rgb(69, 81, 97);
       box-sizing: border-box;
-      
-      svg{
-        color: rgb(69, 81, 97);
-      }
     }
 
     .ql-container{
@@ -134,4 +119,8 @@
   #changedNote{
     order: 4;
   }
+}
+
+.ql-snow .ql-stroke{
+  color:rgb(69, 81, 97);
 }
