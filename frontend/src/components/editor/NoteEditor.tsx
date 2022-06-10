@@ -30,7 +30,7 @@ export const NoteEditor = () => {
         return res[0]    
       })  
       getNote.then(res => {
-        setOrgNote(orgNote => orgNote = res)
+        setOrgNote((orgNote) => orgNote = res)
       })
     } 
   }, [nId])
@@ -72,7 +72,7 @@ export const NoteEditor = () => {
         <form id="noteEditor" onSubmit={(e) => {changeNote ? updateNote(e) : createNote(e)}}>
           <div className="input-select-wrapper">
             <input type="text" defaultValue={noteChanges.title} name="title" placeholder="Title" onChange={(e) => {console.log(noteChanges);setNoteChanges({...noteChanges, title: e.target.value})}}/>
-            <select value={noteChanges.folderId.toString()} onChange={(e) => setNoteChanges({...noteChanges, folderId: Number(e.target.value)})}>
+            <select value={noteChanges.folderId} onChange={(e) => setNoteChanges({...noteChanges, folderId: Number(e.target.value)})}>
               <FolderSelect/>
             </select>
           </div>
