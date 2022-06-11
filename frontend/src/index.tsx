@@ -11,7 +11,6 @@ import { Folder } from './components/userpage/Folder';
 import { Notes } from './components/userpage/Notes';
 import { NoteEditor } from './components/editor/NoteEditor';
 import { Folders } from './components/userpage/Folders';
-import { Note } from './components/userpage/Note';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

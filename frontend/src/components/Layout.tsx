@@ -30,7 +30,7 @@ export const Layout = () => {
     </header>
 
     <main>
-      <Outlet></Outlet>
+      <Outlet/>
       {!loggedIn && <LoginForm />}
     </main>
 

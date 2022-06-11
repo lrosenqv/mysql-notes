@@ -37,9 +37,7 @@ export const Folder = () => {
 
   useEffect(() => {
     let findFolder = folders.find((folder) => {
-      if(folderId === folder.id){
-        return folder
-      }
+      return folderId === folder.id
     })
     if(findFolder){
       setFolder(findFolder)
