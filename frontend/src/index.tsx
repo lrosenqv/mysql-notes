@@ -10,6 +10,8 @@ import { NotFound } from './components/NotFound';
 import { Folder } from './components/userpage/Folder';
 import { Notes } from './components/userpage/Notes';
 import { NoteEditor } from './components/editor/NoteEditor';
+import { Folders } from './components/userpage/Folders';
+import { Note } from './components/userpage/Note';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -21,10 +23,14 @@ root.render(
         <Route path="/" element={<Layout />}>
           <Route index element={<App />} />
           <Route path="/dashboard" element={<Dashboard />}>
-            <Route path="/dashboard/notes" element={<Notes />} />
+            <Route index element={<Folders />} />
+            <Route path="/dashboard/folders" element={<Folders />}>
+              <Route path="/dashboard/folders/:fId" element={<Folder />} />
+            </Route>
+            <Route path="/dashboard/notes" element={<Notes />}/>
+            <Route path="/dashboard/editor" element={<NoteEditor/>} />
+            <Route path="/dashboard/editor/:nId" element={<NoteEditor/>} />
           </Route>
-          <Route path="/folder/:id" element={<Folder/>} />
-          <Route path="/editor/:nId" element={<NoteEditor/>} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

@@ -1,23 +1,10 @@
-import { useEffect, useState } from "react"
-import { IFolder } from "../../models/IFolder"
-import { FolderService } from "../../services/FolderService"
-import { UserService } from "../../services/UserService"
-
-const fService = new FolderService()
-const uService = new UserService()
+import { useContext } from "react"
+import { FoldersContext } from "../userpage/Dashboard"
 
 //Get all folders for select in form
 export const FolderSelect = () => {
-  const [folders, setFolders] = useState<IFolder[]>()
+  const folders = useContext(FoldersContext);
   
-  useEffect(() => {
-    let userId = uService.getLSKey()
-    fService.getFoldersByUser(userId)
-    .then(res => {
-      setFolders(res)
-    })
-  }, [])
-
   let folderOpt = folders?.map(folder => {
     return(<option key={folder.id} value={folder.id.toString()}>
       {folder.title}
@@ -26,6 +13,6 @@ export const FolderSelect = () => {
   })
   
   return(<>
-      {folderOpt}
+    {folderOpt}
   </>)
 }

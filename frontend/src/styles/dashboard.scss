@@ -4,6 +4,7 @@
   box-sizing: border-box;
   display:flex;
   flex-direction: column;
+  row-gap: 1.5rem;
   text-align: center;
   min-height: fit-content;
 
@@ -21,7 +22,7 @@
   .tabs{
     width:100%;
     align-self: flex-start;
-    padding: 2.6rem 0 0;
+    padding: 1rem 0 0;
     box-sizing: border-box;
   
     button{

@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
-import { Link, Outlet } from "react-router-dom"
+import { Link, Outlet, useNavigate } from "react-router-dom"
 import { LoginForm } from "./LoginForm"
 import "../styles/layout.scss"
 
 export const Layout = () => {
+  const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useState(false)
 
   useEffect(() => {
@@ -16,7 +17,7 @@ export const Layout = () => {
   function logout(){
     setLoggedIn(false)
     localStorage.removeItem('onlineUserKey')
-    window.location.assign('/')
+    navigate('/', {replace: true})
   }
 
   return(<>

@@ -1,6 +1,8 @@
 import { ChangeEvent, SyntheticEvent, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { IUserLogin } from "../models/IUserLogin"
 import { UserService } from "../services/UserService"
+
 const service = new UserService()
 
 export const LoginForm = () => {
@@ -18,8 +20,6 @@ export const LoginForm = () => {
 
   function login(e: SyntheticEvent){
     e.preventDefault()
-    console.log(loginValues);
-    
     service.loginUser(loginValues.email, loginValues.password)
     .then(data => {
       if(data === 200){

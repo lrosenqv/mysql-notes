@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { INote } from "../../models/INote"
 import { INoteProps } from "../../models/INoteProps"
 import { NoteService } from "../../services/NoteService"
@@ -8,24 +9,25 @@ import { FolderSelect } from "../editor/FolderSelect";
 const nService = new NoteService();
 
 export const Note = (props: INoteProps) => {
+  let navigate = useNavigate()
   let note: INote = props.note
   let createdDate = new Date(note.createdDate).toLocaleDateString('En-EN', { weekday: "short", month: "long", day: "numeric", year: "2-digit" })
   const [selectedFolder, setSelectedFolder] = useState<number>(note.folderId);
   
   function deleteNote(){
     nService.deleteNote(note.id)
-    window.location.assign('/dashboard/notes')
+    navigate(-1)
   }
 
   return(<>
     <div className="note">
       <div className="noteBtns">
-        <button className="editBtn" onClick={() => {window.location.assign(`/editor/${note.id}`)}}>Edit note</button>
+        <button className="editBtn" onClick={() => {navigate(`/dashboard/editor/${note.id}`)}}>Edit note</button>
         <button className="deleteBtn" onClick={deleteNote}>Delete</button>
       </div>
       <div className="noteDetails">
-        <h2>{note.title}</h2> |
-        <p>{createdDate}</p>
+        <h2 id="noteHeading">{note.title}</h2> |
+        <p id="noteDate">{createdDate}</p>
       </div>
       <div className="noteText" dangerouslySetInnerHTML={{__html: note.text}}></div>
   </div>
@@ -36,7 +38,7 @@ export const Note = (props: INoteProps) => {
       </select>
       <button id="saveFchangeBtn" onClick={(e) => {
         nService.changeFolder(note.id, selectedFolder)
-        window.location.assign(`/folder/${selectedFolder}`)
+        navigate(`/dashboard/folders/${selectedFolder}`, {replace: true})
       }}>Save</button>
     </div>
   </>)

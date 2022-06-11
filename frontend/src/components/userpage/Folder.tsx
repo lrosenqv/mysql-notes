@@ -1,18 +1,22 @@
-import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useContext, useEffect, useState } from "react"
+import { useNavigate, useParams } from "react-router-dom"
 import { IFolder } from "../../models/IFolder"
 import { INote } from "../../models/INote"
 import { FolderService } from "../../services/FolderService"
 import { NoteService } from "../../services/NoteService"
 import { NoteEditor } from "../editor/NoteEditor"
+import { FoldersContext } from "./Dashboard"
 import { Note } from "./Note"
 
 const nService = new NoteService()
 const fService = new FolderService();
 
 export const Folder = () => {
-  const { id } = useParams();
-  let folderId: number = Number(id);
+  const navigate = useNavigate();
+  const folders = useContext(FoldersContext)
+
+  const { fId } = useParams();
+  let folderId: number = Number(fId);
   const [folder, setFolder] = useState<IFolder>({
     id: 0,
     userId: 0,
@@ -32,18 +36,20 @@ export const Folder = () => {
   });
 
   useEffect(() => {
-    if(id){
-      fService.getFolderById(folderId)
-        .then(res => {
-        setFolder(res[0])
-      })
-    nService.getNotesByFolder(folderId)
-      .then(data => {
-        setNotes(data)
+    let findFolder = folders.find((folder) => {
+      if(folderId === folder.id){
+        return folder
+      }
+    })
+    if(findFolder){
+      setFolder(findFolder)
+      nService.getNotesByFolder(findFolder.id)
+      .then(res => {
+        setNotes(res)
       })
     }
-  }, [id, noteOpen, folderId])
-  
+  }, [folderId, folders])
+
   let printNotes = notes?.map(note => {
     let createdDate = new Date(note.createdDate).toLocaleDateString('En-EN', { weekday: "short", month: "long", day: "numeric", year: "2-digit" })
     return(
@@ -57,12 +63,12 @@ export const Folder = () => {
   })
 
   return(<>
-    <section className="dashboard">
-    <button className="backBtn" onClick={() => window.location.assign('/dashboard')}>Back to folders</button>
+    <div className="bgBlur">
+      <button className="backBtn" onClick={() => navigate(-1)}>Back to folders</button>
       <h2>{folder.title}</h2>
       <button className="deleteFolderBtn" onClick={() => {
         fService.deleteFolder(folder.id)
-        window.location.assign('/dashboard')
+        navigate('/dashboard/folders', {replace: true})
       }}>Delete folder</button>
       <ul id="noteList">
         <li className="noteListItem createNewItem" onClick={() => setEditorOpen(true)}>
@@ -70,7 +76,7 @@ export const Folder = () => {
         </li>
         {printNotes}
       </ul>
-    </section>
+    </div>
 
     {noteOpen && 
       <div className="bgBlur">

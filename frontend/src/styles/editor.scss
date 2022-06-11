@@ -1,7 +1,8 @@
 #noteEditor{
-  width: 65%;
   padding: 2rem 2rem 1.5rem;
   gap: 1.1rem 1.8rem;
+  min-width: 65%;
+  min-height: fit-content;
 
   select{
     width: 35%;
@@ -31,7 +32,8 @@
   .quill{
     width:100%;
     background-color: #ccc;
-    height: fit-content;
+    min-height: fit-content;
+    margin-bottom:1.5rem;
 
     .ql-toolbar{
       border-left: 1px solid rgb(69, 81, 97);
@@ -42,13 +44,12 @@
 
     .ql-container{
       border: 1px solid rgb(69, 81, 97);
-      min-height: 20vh;
+      padding: 1rem;
 
       .ql-editor{
-        min-height:20vh;
         color: rgb(69, 81, 97);
-        margin-bottom: 2rem;
         box-sizing: border-box;
+        height:100%;
       }
     }
   }
@@ -86,7 +87,6 @@
 #showNoteChanges{
   display: flex;
   flex-wrap: wrap;
-  width:65%;
   justify-content: space-between;
 
   div{
@@ -98,6 +98,7 @@
     width: 48%;
     min-height: 5rem;
     box-sizing: border-box;
+    text-align: left;
   }
 
   h2{
@@ -119,8 +120,4 @@
   #changedNote{
     order: 4;
   }
-}
-
-.ql-snow .ql-stroke{
-  color:rgb(69, 81, 97);
 }

@@ -1,32 +1,17 @@
-import { useEffect, useState } from "react";
-import { IFolder } from "../../models/IFolder";
-import { FolderService } from "../../services/FolderService";
-import { UserService } from "../../services/UserService";
+import { useContext, useState } from "react";
 import { FolderCreate } from "../editor/FolderCreate";
 import "../../styles/dashboard.scss"
-
-const fService = new FolderService();
-const uService = new UserService();
+import { Outlet, useNavigate } from "react-router-dom";
+import { FoldersContext } from "./Dashboard";
 
 export const Folders = () => {
-  const [folders, setFolders] = useState<IFolder[]>();
-  const [createOpen, setCreateOpen] = useState(false);
+  const navigate = useNavigate();
+  const [createOpen, setCreateOpen] = useState<boolean>(false);
+  const f = useContext(FoldersContext)
 
-  useEffect(() => {
-    let userId = uService.getLSKey()
-    fService.getFoldersByUser(userId)
-    .then(res => {
-      setFolders(res)      
-    })
-  }, [])
-
-  function openFolder(id: number){
-    window.location.assign(`/folder/${id}`)
-  }
-
-  let printFolders = folders?.map(folder => { 
+  let printfolders = f.map((folder) => {
     let createdDate = new Date(folder.createdDate).toLocaleDateString('En-EN', { weekday: "short", month: "long", day: "numeric", year: "2-digit" })
-    return(<li className="folderListItem" key={folder.id} onClick={() => openFolder(folder.id)}>
+    return(<li className="folderListItem" key={folder.id} onClick={() => navigate(`/dashboard/folders/${folder.id}`)}>
       <p>{folder.title}</p>
       <div className="detailsHover">
         <p>{createdDate}</p>
@@ -35,13 +20,15 @@ export const Folders = () => {
   })
 
   return(<>
-      <ul id="folderList">
-        <li onClick={() => setCreateOpen(true)} className="folderListItem createNewItem">
-          <p>...New Folder</p>
-        </li>
-        {printFolders}
-      </ul>
-    
+    <ul id="folderList">
+      <li onClick={() => setCreateOpen(true)} className="folderListItem createNewItem">
+        <p>...New Folder</p>
+      </li>
+      {printfolders}
+    </ul>
+
+    <Outlet/>    
+
     {createOpen && 
     <div className="bgBlur">
       <FolderCreate />
