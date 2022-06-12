@@ -8,6 +8,7 @@ School assignment. Creating a document handler system based on MySQL database.
 ## Backend created with express-generator
 ### Installed npm packages: 
 [cors](https://www.npmjs.com/package/cors)
+
 [express](https://www.npmjs.com/package/express)
 [nodemon](https://www.npmjs.com/package/nodemon)
 [mysql2](https://www.npmjs.com/package/mysql2)
