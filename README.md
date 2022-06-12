@@ -28,7 +28,7 @@ port: 8889
 
 ## Frontend 
 
-created with create react app
+created with create-react-app
 
 ### Installed npm packages: 
 [react-router-dom](https://www.npmjs.com/package/react-router-dom)
