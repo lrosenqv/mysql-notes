@@ -11,4 +11,4 @@ const pool = mysql.createPool({
   multipleStatements: true
 })
 
-exports.pool = pool;
+exports.pool = pool; 
