@@ -5,17 +5,6 @@ const cryptoJS = require('crypto-js');
 const AES = require('crypto-js/aes');
 const mysql = require('mysql2');
 
-/*
-//GET all users
-router.get('/', (req, res) => {
-  pool.query('SELECT * FROM users', (err, result) => {
-    if(err){
-      console.error(err);
-    }
-    res.json(result)
-  })
-});
-*/
 
 //GET one user by id
 router.get('/:id', (req, res) => {

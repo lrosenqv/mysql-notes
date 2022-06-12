@@ -2,17 +2,6 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../connection').pool
 
-/*
-//GET all notes
-router.get('/', (req, res) => {
-  pool.query('SELECT * FROM notes', (err, result) => {
-    if(err){
-      console.error(err);
-    }
-    res.json(result)
-  })
-});*/
-
 //GET one note by id
 router.get('/:id', (req, res) => {
   let sql = `SELECT * FROM notes WHERE id=?`;

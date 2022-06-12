@@ -25,5 +25,13 @@ app.use('/users', usersRouter);
 app.use('/folders', foldersRouter);
 app.use('/notes', notesRouter)
 
+app.con = mysql.createConnection({
+  host: process.env.MYSQL_DB_HOST,
+  database: process.env.MYSQL_DB,
+  user: process.env.MYSQL_DB_USER,
+  password: process.env.MYSQL_DB_PASS,
+  connectionLimit: 10,
+  multipleStatements: true
+})
 
 module.exports = app;
