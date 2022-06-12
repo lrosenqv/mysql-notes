@@ -26,6 +26,8 @@ port: 4000
 
 #### `npm i` --> `npm start`
 
+##### export.sql file contains some test data!
+
 ###
 
 ## Frontend 
