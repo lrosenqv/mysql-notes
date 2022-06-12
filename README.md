@@ -22,7 +22,9 @@ created with express-generator
 
 [crypto-js](https://www.npmjs.com/package/crypto-js)
 
-port: 8889
+port: 4000
+
+#### `npm i` --> `npm start`
 
 ###
 
@@ -39,10 +41,9 @@ created with create-react-app
 
 [react-quill](https://www.npmjs.com/package/react-quill)
 
-port: 3001
+port: 3000
 
 #### `npm i` --> `npm start`
-###
 
 Login credentials for testing the app:
 
