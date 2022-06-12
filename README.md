@@ -45,7 +45,9 @@ port: 3001
 ###
 
 Login credentials for testing the app:
+
 email: test_user1@test.com
+
 password: thisIsAGr8Pass123
 
 ###
