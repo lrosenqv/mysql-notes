@@ -3,10 +3,9 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mysql = require('mysql2')
-const dotenv = require('dotenv').config()
 const cors = require('cors')
-
 const app = express();
+const pool = require('./connection').pool
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -25,13 +24,11 @@ app.use('/users', usersRouter);
 app.use('/folders', foldersRouter);
 app.use('/notes', notesRouter)
 
-app.con = mysql.createConnection({
-  host: process.env.MYSQL_DB_HOST,
-  database: process.env.MYSQL_DB,
-  user: process.env.MYSQL_DB_USER,
-  password: process.env.MYSQL_DB_PASS,
-  connectionLimit: 10,
-  multipleStatements: true
+pool.getConnection((err, connection) => {
+  if(err){
+    console.error(err);
+  }
+  connection.release()
 })
 
 module.exports = app;

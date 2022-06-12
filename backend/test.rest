@@ -2,7 +2,7 @@ GET http://localhost:4000/users
 
 ###
 
-GET http://localhost:4000/folders/u/12
+GET http://localhost:4000/folders/28
 
 ###
 

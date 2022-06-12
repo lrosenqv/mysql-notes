@@ -16,16 +16,7 @@ export class FolderService{
     return response
   }
 
-  //Get all folders made by the user by one folderId
-  async getFoldersById(folderId: number){
-    let response = await axios.get<IFolder[]>(`${url}/all/${folderId}`)
-    .then(res => {
-      return res.data
-    })
-    return response
-  }
-
-  //Gett all folders by userId
+  //Get all folders by userId
   async getFoldersByUser(userId: number){
     let response = axios.get<IFolder[]>(`${url}/u/${userId}`)
       .then(res => {

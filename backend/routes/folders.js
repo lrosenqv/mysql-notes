@@ -10,22 +10,9 @@ router.get('/:id', (req, res) => {
     if(err){
       console.error(err);
     }
-    res.status(200).send(result)
+    res.status(200).json(result)
   })
 });
-
-//CHANGE folder title
-router.put('/change/:id', (req, res) => {
-  let sql = `UPDATE folders SET title=? WHERE id=?`
-
-  pool.execute(sql, [req.body.title, req.params.id], (err, result) => {
-    if(err){
-      console.error(err)
-    };
-
-    res.status(200).send("Folder title is updated!")
-  })
-})
 
 //DELETE folder
 router.delete('/delete/:id', (req, res) => {
@@ -51,7 +38,7 @@ router.post('/u/:userId', (req, res) => {
   })
 });
 
-//GET folders by user
+//GET folders by userId
 router.get('/u/:userId', (req, res) => {
   let sql = `SELECT * FROM folders WHERE userId=?`
 
@@ -63,6 +50,7 @@ router.get('/u/:userId', (req, res) => {
   })
 });
 
+/*
 //GET all folders of user by folderId of one folder
 router.get('/all/:id', (req, res) => {
   let sql = `SELECT * FROM folders WHERE userId IN(SELECT userId FROM folders WHERE id=?)`
@@ -74,5 +62,6 @@ router.get('/all/:id', (req, res) => {
     res.status(200).send(result)
   })
 });
+*/
 
 module.exports = router;

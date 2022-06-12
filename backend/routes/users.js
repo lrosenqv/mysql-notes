@@ -5,7 +5,6 @@ const cryptoJS = require('crypto-js');
 const AES = require('crypto-js/aes');
 const mysql = require('mysql2');
 
-
 //GET one user by id
 router.get('/:id', (req, res) => {
   let sql = `SELECT id, email FROM users WHERE id=?`;
@@ -42,8 +41,11 @@ router.post('/login', (req, res) => {
       } 
     } else {
       res.status(404).send('Please sign in with valid credentials');
+      pool.destroy()
     }
-    if(error) throw error
+    if(error) {
+      console.error(error);
+    }
   })
 })
 
