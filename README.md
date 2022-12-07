@@ -1,7 +1,7 @@
 # myqsl-notes
 ###
 
-School assignment. Creating a document handler system based on MySQL database.
+School assignment. Creating a document handler system based on MySQL database, with headless architecture.
 
 ###
 
